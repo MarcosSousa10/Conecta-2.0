@@ -2,60 +2,33 @@
 import './principal.css';
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { format } from "date-fns";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import moment from 'moment';
 import Carrossel from "../../Components/carrossel";
 import icone from '../../Components/image/recompensa.svg';
 import React from 'react';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import Infor from 'react-bootstrap-icons/dist/icons/info-circle';
 import { ToastContainer, toast } from 'react-toastify';
-import Carousel from 'react-bootstrap/Carousel';
+import Table from 'react-bootstrap/Table';
 
 export default function Principal() {
-    const [datainicio, setDatainicio] = useState();
-    const [datafim, setDataFim] = useState();
-    const [data, setData] = useState([]);
+
     const [pontucao, setPontuacao] = useState(0);
     const [informacao, setInfromacao] = useState('');
-    const [campo, setCampo] = useState(false);
-    const [show, setShow] = useState(false);
-    const [nome, setNome] = useState('');
+
+    const [nome, setNome] = useState('Campanha a definir');
+    const [nome1, setNome1] = useState('Campanha a definir');
+    const [nome2, setNome2] = useState('Campanha a definir');
+
     const [clientespositivado, setClientespositivado] = useState('');
-    const [campanha, setCampanha] = useState('');
-    const [mostrarTermos, setMostrarTermos] = useState(true);
-    const [aceitouTermos, setAceitouTermos] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [campanha, setCampanha] = useState('Periodo a definir');
+    const [campanha1, setCampanha1] = useState('Periodo a definir');
+    const [campanha2, setCampanha2] = useState('Periodo a definir');
     var id;
     var cod;
-    const [texto, setTexto] = useState('');
-    const informa = async () => {
-        const savedUserData = localStorage.getItem("@detailUser");
-        if (savedUserData) {
-            const userData = JSON.parse(savedUserData);
-            id = userData.uid;
-            cod = userData.email;
-        } else {
-            console.log("Nenhuma informação encontrada no localStorage.");
-        }
-        await axios.get(`https://www.othondecarvalho.com.br:5555/pc/Saibamais`, {
-            headers: { 'Authorization': `Bearer ${id}` },
-        }).then(Response => {
-            setTexto(Response.data.texto);
-        })
-            .catch(Response => {
-                console.log(Response)
-            });
-    }
-    useEffect(() => {
-        informa();
-    }, []);
+
     useEffect(() => {
         const savedUserData = localStorage.getItem("@detailUser");
         if (savedUserData) {
@@ -70,14 +43,9 @@ export default function Principal() {
         informacoes();
         TrazerCampanha();
         clientespositivados();
+        fetchImages4();
+
     }, []);
-
-    const aceitarTermos = () => {
-        setAceitouTermos(true);
-        setMostrarTermos(false);
-    };
-
-
     const pontuacao = async () => {
         const savedUserData = localStorage.getItem("@detailUser");
         if (savedUserData) {
@@ -120,7 +88,6 @@ export default function Principal() {
             headers: { 'Authorization': `Bearer ${id}` },
         }).then(Response => {
             setInfromacao(Response.data);
-            fetchData(Response.data.cnpj);
         })
             .catch(Response => {
                 toast.error("Error Na Pontuaçao", {
@@ -136,37 +103,7 @@ export default function Principal() {
                 sair();
             });
     }
-    const vendas = async () => {
-        const savedUserData = localStorage.getItem("@detailUser");
-        if (savedUserData) {
-            const userData = JSON.parse(savedUserData);
-            id = userData.uid;
-            cod = userData.email;
-        } else {
-            console.log("Nenhuma informação encontrada no localStorage.");
-        }
-        const formattedDatainicio = datainicio ? format(new Date(datainicio), "dd-MM-yyyy") : "";
-        const formattedDatafim = datafim ? format(new Date(datafim), "dd-MM-yyyy") : "";
-        await axios.get(`https://othondecarvalho.com.br:5555/pc/vendas/${cod}/${formattedDatainicio}/${formattedDatafim}`, {
-            headers: { 'Authorization': `Bearer ${id}` },
-        }).then(Response => {
-            setData(Response.data);
-            alterarCampo();
 
-        })
-            .catch(Response => {
-                toast.error("Não Foram Encontrados Dasdos Para Esta Consulta", {
-                    position: "top-right",
-                    autoClose: 2500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
-            });
-    }
 
 
 
@@ -175,214 +112,14 @@ export default function Principal() {
         window.location.href = "/conecta";
     }
 
-    const alterarCampo = () => {
-        setCampo(true);
-    };
-
-    const [monthsData, setMonthsData] = useState([]);
-
-    const fetchData = async (cnpj) => {
-        try {
-
-            const savedUserData = localStorage.getItem("@detailUser");
-            if (savedUserData) {
-                const userData = JSON.parse(savedUserData);
-                id = userData.uid;
-                cod = userData.email;
-            } else {
-                console.log("Nenhuma informação encontrada no localStorage.");
-            }
-            const requests = Array.from({ length: 12 }, (_, index) =>
-                axios.get(`https://othondecarvalho.com.br:5555/pc/dashboard/${cnpj}/${index + 1}`, {
-                    headers: { Authorization: `Bearer ${id}` },
-                })
-            );
-
-            const responses = await Promise.all(requests);
-            const data = responses.map((response) => response.data.codbrinde || 0);
-            setMonthsData(data);
-
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-
-    const multiAxisData = {
-        labels: [
-            'Janeiro',
-            'Fevereiro',
-            'Março',
-            'Abril',
-            'Maio',
-            'Junho',
-            'Julho',
-            'Agosto',
-            'Setembro',
-            'Outubro',
-            'Novenbro',
-            'Dezembro',
-        ],
-        datasets: [
-            {
-                label: 'Vendas',
-                fill: false,
-                borderColor: '#42A5F5',
-                yAxisID: 'y',
-                tension: 0.4,
-                data: monthsData,
-            },],
-    };
-
-    const getLightTheme = () => {
-        let basicOptions = {
-            maintainAspectRatio: false,
-            aspectRatio: .6,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#495057'
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        color: '#495057'
-                    },
-                    grid: {
-                        color: '#ebedef'
-                    }
-                },
-                y: {
-                    ticks: {
-                        color: '#495057'
-                    },
-                    grid: {
-                        color: '#ebedef'
-                    }
-                }
-            }
-        };
-
-        let multiAxisOptions = {
-            stacked: false,
-            maintainAspectRatio: false,
-            aspectRatio: .6,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#495057'
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        color: '#495057'
-                    },
-                    grid: {
-                        color: '#ebedef'
-                    }
-                },
-                y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    ticks: {
-                        color: '#495057'
-                    },
-                    grid: {
-                        color: '#ebedef'
-                    }
-                },
-                y1: {
-                    type: 'linear',
-                    display: false,
-                    position: 'right',
-                    ticks: {
-                        color: '#495057'
-                    },
-                    grid: {
-                        color: '#ebedef'
-                    }
-                }
-            }
-        };
-
-        return {
-            basicOptions,
-            multiAxisOptions
-        }
-    }
-
-    // const { basicOptions, multiAxisOptions } = getLightTheme();
-    const { multiAxisOptions } = getLightTheme();
-
-    // eslint-disable-next-line no-unused-vars
-    const [images, setImages] = useState([]);
-
-
-    useEffect(() => {
-        const fetchImages = async () => {
-            try {
-                const savedUserData = localStorage.getItem('@detailUser');
-                if (!savedUserData) {
-                    console.log('Nenhuma informação encontrada no localStorage.');
-                    return;
-                }
-                const userData = JSON.parse(savedUserData);
-                const token = userData.uid;
-                const response = await axios.get('https://othondecarvalho.com.br:5555/images', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    }
-                });
-                setImages(response.data);
-
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchImages();
-    }, []);
     const [imageToShow, setImageToShow] = useState('');
     const [imageToShow2, setImageToShow2] = useState('');
     const [imageToShow3, setImageToShow3] = useState('');
     const [imageToShow4, setImageToShow4] = useState('');
     const [imageToShow5, setImageToShow5] = useState('');
-    const [imageToShowt, setImageToShowt] = useState([]);
-    useEffect(() => {
-        const fetchImages4 = async () => {
-            try {
-                const savedUserData = localStorage.getItem('@detailUser');
-                if (!savedUserData) {
-                    console.log('Nenhuma informação encontrada no localStorage.');
-                    return;
-                }
-                const userData = JSON.parse(savedUserData);
-                const token = userData.uid;
-                const response = await axios.get('https://othondecarvalho.com.br:5555/imagemCarrossel', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    }
-                });
-                if (response.data.length > 0) {
-                    setImageToShow5(response.data[4]);
-                    setImageToShow4(response.data[3]);
-                    setImageToShow3(response.data[2]);
-                    setImageToShow2(response.data[1]);
-                    setImageToShow(response.data[0]);
 
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchImages4();
-    }, []);
-    const fetchImages = async () => {
+
+    const fetchImages4 = async () => {
         try {
             const savedUserData = localStorage.getItem('@detailUser');
             if (!savedUserData) {
@@ -391,25 +128,23 @@ export default function Principal() {
             }
             const userData = JSON.parse(savedUserData);
             const token = userData.uid;
-            const response = await axios.get('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas', {
+            const response = await axios.get('https://othondecarvalho.com.br:5555/imagemCarrossel', {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 }
             });
             if (response.data.length > 0) {
-
-                setImageToShowt(response.data);
+                setImageToShow5(response.data[4]);
+                setImageToShow4(response.data[3]);
+                setImageToShow3(response.data[2]);
+                setImageToShow2(response.data[1]);
+                setImageToShow(response.data[0]);
 
             }
         } catch (error) {
             console.error(error);
         }
     };
-    useEffect(() => {
-        fetchImages();
-    }, []);
-
-
 
 
     const TrazerCampanha = async () => {
@@ -471,7 +206,7 @@ export default function Principal() {
             });
     }
     return (
-        <div className="marcado tamanho body " style={{ marginLeft: 0, width: '100%', textAlign: 'center', alignItems: 'center', justifyContent: 'center', padding: '12px' }} >
+        <div className="marcado tamanho body " style={{ marginLeft: 0, width: '100%', textAlign: 'center', alignItems: 'center', justifyContent: 'center', paddingLeft: '12px' }} >
 
             <ToastContainer />
 
@@ -479,7 +214,7 @@ export default function Principal() {
 
                 <div className="row body" style={{ padding: 0, width: '100%' }} >
 
-                    <div style={{ marginTop: window.innerWidth > 600 ? 0 : 70, padding: 0, width: '100%', marginLeft: '1%' }} >
+                    <div style={{ marginTop: window.innerWidth > 600 ? 0 : 70, padding: 0, width: '100%' }} >
 
                         <Row style={{ display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center', padding: 0, width: '100%', margin: '0' }}>
                             <Col xs={11} style={{ margin: 0, padding: 0, width: '100%' }} >
@@ -495,78 +230,35 @@ export default function Principal() {
 
                         <Row className="mt-3 " style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <Col style={{ textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
-                                {/* <Row style={{marginLeft:"20px"}}>
-                                <Col style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 0, padding: 0, width: '100%', marginBottom:"10px" }}>
-                                    <Button style={{ fontSize: '15px', margin: 1, background: '#333333' }} variant="primary" onClick={() => {
-                                        handleShow(); informacoes(); pontuacao(); TrazerCampanha(); clientespositivados();
-                                    }}>
-                                        <Infor style={{ fontSize: '30px' }} /> {window.innerWidth <= 1200 ? "" : "Informações Sobre Campanhas Vigentes"}
-                                    </Button>
-                                </Col>
-                            <Offcanvas show={show} onHide={handleClose} className="bg-dark" style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
-                                <Offcanvas.Header closeButton >
-                                    <Offcanvas.Title  > Informações</Offcanvas.Title>
-                                </Offcanvas.Header>
-                                <Offcanvas.Body style={{ textAlign: 'left', width: '100%' }}>
-                                    {texto}
-                                </Offcanvas.Body>
-                            </Offcanvas>
-                        </Row> */}
                                 <Row style={{ textAlign: 'center', alignItems: 'center', justifyContent: 'center', marginLeft: '20px' }}>
-                                    <div className="card" style={{ background: '#e2e1e1' }}>
-                                        <div className="card-header">
-                                            <Row>
-                                                <Col style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 0, padding: 0, width: '100%' }}>
-                                                    <h4 style={{ fontSize: '15px' }}>Campanha vigente :</h4>
-                                                </Col>
-
-                                                <Col style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 0, padding: 0, width: '100%' }}>
-                                                    <h4 style={{ fontSize: '15px' }}>Período da campanha : </h4>
-                                                </Col>
-                                            </Row>
-                                        </div>
-                                        <div className="card-body" style={{ textAlign: 'left' }}>
-                                            <Row>
-                                                <Col style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 0, padding: 0, width: '100%' }}>
-                                                    <h4 style={{ fontSize: '15px' }}> {nome}</h4>
-                                                </Col>
-                                                <Col xs={1}>
-                                                    <div style={{ borderLeft: '2px solid #000', height: '100%' }}></div>
-                                                </Col>
-                                                <Col style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 0, padding: 0, width: '100%' }}>
 
 
-                                                    <h4 style={{ fontSize: '15px' }}> {campanha}</h4>
-                                                </Col>
-                                            </Row>
-                                            <hr />
-                                            <Row>
-                                                <Col style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 0, padding: 0, width: '100%' }}>
-                                                    <h4 style={{ fontSize: '15px' }}> {nome}</h4>
-                                                </Col>
-                                                <Col xs={1}>
-                                                    <div style={{ borderLeft: '2px solid #000', height: '100%' }}></div>
-                                                </Col>
-                                                <Col style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 0, padding: 0, width: '100%' }}>
-                                                    <h4 style={{ fontSize: '15px' }}> {campanha}</h4>
-                                                </Col>
-                                            </Row>
-                                            <hr />
-
-                                            <Row>
-                                                <Col style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 0, padding: 0, width: '100%' }}>
-                                                    <h4 style={{ fontSize: '15px' }}>{nome}</h4>
-                                                </Col>
-                                                <Col xs={1}>
-                                                    <div style={{ borderLeft: '2px solid #000', height: '100%' }}></div>
-                                                </Col>
-                                                <Col style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 0, padding: 0, width: '100%' }}>
-                                                    <h4 style={{ fontSize: '15px' }}>{campanha}</h4>
-                                                </Col>
-
-                                            </Row>
-                                        </div>
-                                    </div>
+                                    <Table striped bordered hover style={{  border: 'black' }}>
+                                        <thead >
+                                            <tr >
+                                                <th style={{ background: '#e2e1e1', color: 'black' }}>#</th>
+                                                <th style={{ background: '#e2e1e1', color: 'black' }}>Campanha vigente :</th>
+                                                <th style={{ background: '#e2e1e1', color: 'black' }}>Periodo:</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr >
+                                                <td style={{ background: '#e2e1e1', color: 'black' }}>1</td>
+                                                <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> <Link to={'/Campanha'} style={{ textDecoration: 'none', color: 'black' }}>{nome}</Link></h4></td>
+                                                <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> {campanha}</h4></td>
+                                            </tr>
+                                            <tr>
+                                                <td style={{ background: '#e2e1e1', color: 'black' }}>2</td>
+                                                <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> <Link to={'/Campanha1'} style={{ textDecoration: 'none', color: 'black' }}>{nome1}</Link></h4></td>
+                                                <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> {campanha1}</h4></td>
+                                            </tr>
+                                            <tr>
+                                                <td style={{ background: '#e2e1e1', color: 'black' }}>3</td>
+                                                <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> <Link to={'/Campanha2'} style={{ textDecoration: 'none', color: 'black' }}>{nome2}</Link></h4></td>
+                                                <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> {campanha2}</h4></td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
                                 </Row>
                             </Col>
 

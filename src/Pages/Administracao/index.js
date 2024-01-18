@@ -822,26 +822,8 @@ export default function Administrador() {
     //     }
     // };
 
-    const informacoesCampanha = async () => {
-        const savedUserData = localStorage.getItem("@detailUser");
-        if (savedUserData) {
-            const userData = JSON.parse(savedUserData);
-            const token = userData.uid;
-        } else {
-            console.log("Nenhuma informação encontrada no localStorage.");
-        }
-        await axios.get(``, {
-            headers: { 'Authorization': `Bearer ${token}` },
-        }).then(Response => {
-            setNome(Response.data.nome);
-            setPeriodo(Response.data.periodo);
-        })
-            .catch(error => {
-                sair();
 
-            });
-    }
-    const editarssss = async () => {
+    const editarssss = async (number) => {
         const savedUserData = localStorage.getItem("@detailUser");
         if (savedUserData) {
             const userData = JSON.parse(savedUserData);
@@ -850,7 +832,7 @@ export default function Administrador() {
             // Caso não haja dados salvos, você pode tratar o caso de acordo
             console.log("Nenhuma informação encontrada no localStorage.");
         }
-        await axios.put(`https://othondecarvalho.com.br:5555/pc/EditarCampanha/1`, {
+        await axios.put(`https://othondecarvalho.com.br:5555/pc/EditarCampanha/${number}`, {
             nome: nome,
             periodo: periodo
         },
@@ -866,6 +848,7 @@ export default function Administrador() {
 
             });
     }
+    
     const navigate = useNavigate();
 
     const editarCadastro = async () => {

@@ -2,7 +2,7 @@
 
 import React, {  useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { House } from 'react-bootstrap-icons';
 import Infor from 'react-bootstrap-icons/dist/icons/info-circle';
 import './sidebar.style.css'

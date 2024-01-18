@@ -17,6 +17,10 @@ import { Col, Row } from 'react-bootstrap';
 import Fornecedores from "./Pages/Fornecedores";
 import Contato from "./Pages/Contato";
 import Premiacoes from "./Pages/Premiações";
+import PrimeiraCampanha from "./Pages/FotosDoEncontro/PrimeiraCampanha";
+import Campanha from "./Pages/Campanhas/Campanha";
+import Campanha1 from "./Pages/Campanhas/Campanha1";
+import Campanha2 from "./Pages/Campanhas/Campanha2";
 
 function App() {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -46,6 +50,11 @@ function App() {
                 <Route path="/Fornecedores" element={<Fornecedores />} />
                 <Route path="/Contato" element={<Contato />} />
                 <Route path="/Premiacoes" element={<Premiacoes />} />
+                <Route path="/PrimeiraCampanha" element={<PrimeiraCampanha />} />
+                <Route path="/Campanha" element={<Campanha />} />
+                <Route path="/Campanha1" element={<Campanha1 />} />
+                <Route path="/Campanha2" element={<Campanha2 />} />
+
                 
               </Routes>
             </div>

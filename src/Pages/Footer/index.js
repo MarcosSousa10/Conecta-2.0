@@ -12,17 +12,17 @@ export default function ModalFooter() {
         setMenuVisible(!!savedUserData);
     }, []);
     return (
-        <footer className="site-footer footer-v1 bg-dark container-md-fluid" style={{display: menuVisible ? '' : 'none', width:'100%',margin:0,padding:0}}>
-            <div className="footer-content" style={{width:'100%',margin:0,padding:0}}>
+        <footer className="site-footer footer-v1 bg-dark container-md-fluid" style={{ display: menuVisible ? '' : 'none', width: '100%', margin: 0, padding: 0 }}>
+            <div className="footer-content" style={{ width: '100%', margin: 0, padding: 0 }}>
                 <div className="container row">
                     <div className="footer-logo-social col-1">
                         <div className="footer-logo">
                             <a href="/conecta" className="footer-logo-link"> </a>
                             <a href="/conecta" className="custom-logo-link" rel="home" aria-current="page" >
-                                <div style={{ width:250, marginLeft:'-10%' }}>
-                                 <img src={watermarkImage} width={200}  alt={``} />
+                                <div style={{ width: 250, marginLeft: '-10%' }}>
+                                    <img src={watermarkImage} width={200} alt={``} />
                                 </div>
-                                
+
                             </a>
                             <span className="footer-logo-text"></span>
                         </div>
@@ -35,14 +35,24 @@ export default function ModalFooter() {
                                     <ul className="contact-details list-unstyled">
                                         <li>Ligue:
                                             <br />
-                                            <a href="#">(31) 2103-3000</a>
+                                            <a href="#">31 8225-2486
+</a>
                                         </li>
-                                        <li>E-mail: <a href="#">atendimento@othondecarvalho.com.br</a>
+                                        <li>Instagram:<br/>
+                                            <a href="https://www.instagram.com/luminatobh/">
+                                                https://www.instagram.com/luminatobh/
+                                            </a>
+                                        </li>
+                                        <li>Facebook:<br/>
+                                             <a href="https://www.facebook.com/luminatobh">
+                                                https://www.facebook.com/luminatobh
+
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
-                            </div>								
                             </div>
+                        </div>
                         <div className="block footer-widget-2">
                             <div id="nav_menu-5" className="widget widget_nav_menu">
                                 <span className="gamma widget-title">Ajuda e Suporte</span>
@@ -77,11 +87,11 @@ export default function ModalFooter() {
                 </div>
             </div>
             <div className="footer-bottom-bar">
-            <div className="copyright-info celular" style={{  textAlign: 'center', alignItems: 'center', justifyContent: 'center' }} >© 2023 Todos direitos reservados a Othon De Carvalho-
-                                <a href="https://www.linkedin.com/in/marcos-pego-de-sousa/"
-                                    target="_blank" rel="noopener">Designed and develope by Marcos Sousa
-                                </a>
-                            </div>
+                <div className="copyright-info celular" style={{ textAlign: 'center', alignItems: 'center', justifyContent: 'center' }} >© 2023 Todos direitos reservados a Othon De Carvalho-
+                    <a href="https://www.linkedin.com/in/marcos-pego-de-sousa/"
+                        target="_blank" rel="noopener">Designed and develope by Marcos Sousa
+                    </a>
+                </div>
                 <div className="container">
                     <div className="footer-bottom-bar-inner">
                         <div className="payment-icons">

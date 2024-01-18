@@ -32,19 +32,19 @@ export default function Sobre() {
         informacoes();
     }, []);
     return (
-        <div className="tamanho container-fluid body p-5 " style={{padding:0,marginLeft:0,width:'100%',marginTop: window.innerWidth > 600 ? '0' : '3%' , textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="tamanho container-fluid body d-flex align-items-center justify-content-center p-5"    style={{padding:0,marginLeft:0,width:'100%',marginTop: window.innerWidth > 600 ? '0' : '3%' , textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
 
 
             <Card className="text-center container body" style={{}}>
                 <Card.Header>  
                     <h1>
                         <b style={{fontFamily: "Croissant One",}}>
-                            Conecta 
+                            Institucional 
                         </b>   
                     </h1>  
                 </Card.Header>
                 <Card.Body>
-                    <Card.Title>Sobre a Experiência</Card.Title>
+                    <Card.Title>Luminato</Card.Title>
                     <Card.Text>
                     {isLoading1 ? (
                                         <div>
