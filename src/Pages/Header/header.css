@@ -1,0 +1,58 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&family=Rubik+Iso&display=swap');
+.container-main {
+    background-color: #0004ff;
+    color: #fff;
+    display: flex;
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 7%;
+}
+
+.container-main ul {
+    list-style: none;
+    display: flex;
+}
+
+.container-main ul li {
+    padding: 0 20px;
+}
+
+.container-main ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.img {
+    height: 50px;
+}
+@media(max-width: 1250px) {
+    .computer {
+        display: none;
+    }
+}
+@media(min-width: 1250px) {
+    .celular {
+        display: none;
+    }
+
+
+  }
+  @media(min-width: 600px) {
+    .celulares {
+        display: none;
+    }
+
+  }
+  @media(max-width:600px){
+  .media {
+    display:none;
+  }
+}
+  @media(min-width:1250px){
+    .mediam {
+      display:none;
+    }
+}

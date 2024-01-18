@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Alkalami&display=swap');
+.contato {
+    font-family: 'Alkalami', serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 130px);
+}
+
+.contato form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contato form input {
+    margin: 5px;
+    font-family: 'Alkalami', serif;
+    height: 3vh;
+    width: 100vh;
+}
+
+.contato h1 {
+    margin-right: 50px;
+}

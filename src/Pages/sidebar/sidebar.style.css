@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&family=Playfair+Display:ital,wght@1,900&display=swap');
+.contatos {
+    font-family: 'PT Serif', serif;
+
+            display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 130px);
+}

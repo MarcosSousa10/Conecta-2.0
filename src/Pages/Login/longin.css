@@ -1,0 +1,10 @@
+
+
+.tamanho {
+    min-height: calc(100vh - 110px);
+}
+@media(max-width:600px){
+    .mediacelular {
+      display:none;
+    }
+  }

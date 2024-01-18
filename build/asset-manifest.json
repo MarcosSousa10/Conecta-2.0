@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/conecta/static/css/main.9f173800.css",
+    "main.js": "/conecta/static/js/main.94cf6a1c.js",
+    "static/js/885.c0573efd.chunk.js": "/conecta/static/js/885.c0573efd.chunk.js",
+    "static/media/bootstrap-icons.woff?": "/conecta/static/media/bootstrap-icons.4753c5ba57962b4d7bf8.woff",
+    "static/media/3D Text-1s-280px (1).gif": "/conecta/static/media/3D Text-1s-280px (1).6383880ab8c29c9201a0.gif",
+    "static/media/bootstrap-icons.woff2?": "/conecta/static/media/bootstrap-icons.6d63d0501e5ed7b79dab.woff2",
+    "static/media/preto Luminato.png": "/conecta/static/media/preto Luminato.25b8e4d47d02b7c58617.png",
+    "static/media/Contrato Profissionais com a Othon Final.pdf": "/conecta/static/media/Contrato Profissionais com a Othon Final.3d3c8469fcd7d2b23de8.pdf",
+    "static/media/logo.png": "/conecta/static/media/logo.54ea2aa9de874b54da26.png",
+    "static/media/preto conecta.png": "/conecta/static/media/preto conecta.e21b5bcb01e6598435a2.png",
+    "static/media/recompensa.svg": "/conecta/static/media/recompensa.d76070a96b3ae1982d869d082e048f8a.svg",
+    "index.html": "/conecta/index.html",
+    "main.9f173800.css.map": "/conecta/static/css/main.9f173800.css.map",
+    "main.94cf6a1c.js.map": "/conecta/static/js/main.94cf6a1c.js.map",
+    "885.c0573efd.chunk.js.map": "/conecta/static/js/885.c0573efd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9f173800.css",
+    "static/js/main.94cf6a1c.js"
+  ]
+}
