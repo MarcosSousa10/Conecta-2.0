@@ -18,9 +18,15 @@ export default function Administrador() {
     const [cnpj, setCnpj] = useState("");
     const [cpf, setCpf] = useState("");
     const [inicio, setInicio] = useState("");
+    const [inicio1, setInicio1] = useState("");
+    const [inicio2, setInicio2] = useState("");
     const [fim, setFim] = useState("");
     const [fator, setFator] = useState("");
+    const [fator1, setFator1] = useState("");
+    const [fator2, setFator2] = useState("");
     const [tudo, setTudo] = useState("");
+    const [tudo1, setTudo1] = useState("");
+    const [tudo2, setTudo2] = useState("");
     const [codprofi, setCodprofi] = useState("");
     const [lista, setLista] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
@@ -438,7 +444,9 @@ export default function Administrador() {
     useEffect(() => {
         return () => {
             listar();
-            ltudo();
+            ltudo('1');
+            ltudo('2');
+            ltudo('3');
         };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -460,7 +468,7 @@ export default function Administrador() {
             .catch(error => {
             });
     }
-    const ltudo = async () => {
+    const ltudo = async (ID) => {
         const savedUserData = localStorage.getItem("@detailUser");
         if (savedUserData) {
             const userData = JSON.parse(savedUserData);
@@ -468,10 +476,18 @@ export default function Administrador() {
         } else {
             console.log("Nenhuma informação encontrada no localStorage.");
         }
-        await axios.get(`https://othondecarvalho.com.br:5555/pc/select`, {
+        await axios.get(`https://othondecarvalho.com.br:5555/pc/select/${ID}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         }).then(Response => {
-            setTudo(Response.data)
+            if(ID === '1'){
+                setTudo(Response.data)
+
+            }else  if(ID === '2'){
+                setTudo1(Response.data)
+            }else  if(ID === '3'){
+                setTudo2(Response.data)
+
+            }
         })
             .catch(error => {
                 sair();
@@ -489,9 +505,9 @@ export default function Administrador() {
     // const admin = () => {
     //     navigate(`/Administrador`);
     // }
-    const datainicio = async () => {
-        const isValid = validateFields();
-        if (isValid) {
+    const datainicio = async (DataInicio,ID) => {
+        // const isValid = validateFields();
+        // if (isValid) {
             const savedUserData = localStorage.getItem("@detailUser");
             if (savedUserData) {
                 const userData = JSON.parse(savedUserData);
@@ -500,18 +516,26 @@ export default function Administrador() {
                 // Caso não haja dados salvos, você pode tratar o caso de acordo
                 console.log("Nenhuma informação encontrada no localStorage.");
             }
-            await axios.get(`https://othondecarvalho.com.br:5555/pc/updatedtinicio/${inicio}`, {
+            await axios.get(`https://othondecarvalho.com.br:5555/pc/updatedtinicio/${DataInicio}/${ID}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             }).then(Response => {
                 notify();
                 listar();
-                setInicio("");
+                if(ID === '1'){
+                    setInicio("");
+    
+                }else  if(ID === '2'){
+                    setInicio1("");
+                }else  if(ID === '3'){
+                    setInicio2("");
+    
+                }
             })
                 .catch(error => {
                     errorr();
 
                 });
-        }
+       // }
     }
     const datafim = async () => {
         const isValid = validateFields2();
@@ -537,7 +561,7 @@ export default function Administrador() {
                 });
         }
     }
-    const divisao = async () => {
+    const divisaoID = async (fatorDivisao,ID) => {
 
         const savedUserData = localStorage.getItem("@detailUser");
         if (savedUserData) {
@@ -547,12 +571,18 @@ export default function Administrador() {
             // Caso não haja dados salvos, você pode tratar o caso de acordo
             console.log("Nenhuma informação encontrada no localStorage.");
         }
-        await axios.get(`https://othondecarvalho.com.br:5555/pc/updatefatordivisao/${fator}`, {
+        await axios.get(`https://othondecarvalho.com.br:5555/pc/updatefatordivisao/${fatorDivisao}/${ID}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         }).then(Response => {
             listar();
             notify();
-            setFator("");
+            if (ID === '1') {
+                setFator("");
+            } else if (ID === '2') {
+                setFator1("");
+            } else if (ID === '3') {
+                setFator2("");
+            }
         })
             .catch(error => {
                 errorr();
@@ -615,7 +645,7 @@ export default function Administrador() {
     const handleKeyPresss = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            divisao();
+            divisaoID();
 
         }
     }
@@ -1068,7 +1098,7 @@ export default function Administrador() {
                                         </Form.Group>
                                     </Form>
                                 </Col>
-                                
+
                             </Row>
                             <Row>
                                 <Row><h5>1° Campanha</h5></Row>
@@ -1083,7 +1113,7 @@ export default function Administrador() {
                                                 placeholder={tudo.fatordivisao}
                                                 onKeyPress={handleKeyPresss}
                                             />
-                                            <Button className="divisao" onClick={divisao} > Salvar</Button>
+                                            <Button className="divisao" onClick={()=>divisaoID(fator,'1')} > Salvar</Button>
                                         </Form.Group>
                                     </Form>
 
@@ -1101,7 +1131,7 @@ export default function Administrador() {
                                                 placeholder={tudo.dtinicio}
                                                 onKeyPress={handleKeyPressss}
                                             />
-                                            <Button className="dtinicio" onClick={datainicio}> Salvar</Button>
+                                            <Button className="dtinicio" onClick={()=>datainicio(inicio,'1')}> Salvar</Button>
                                             <Form.Text className='text-danger' style={{ margin: 0, padding: 0 }}>{errors.inicio}</Form.Text>
                                         </Form.Group>
                                     </Form>
@@ -1134,12 +1164,12 @@ export default function Administrador() {
                                             <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Fator Divisao </Form.Label>
                                             <Form.Control
                                                 type="number"
-                                                value={fator}
-                                                onChange={(txt) => setFator(txt.target.value)}
-                                                placeholder={tudo.fatordivisao}
+                                                value={fator1}
+                                                onChange={(txt) => setFator1(txt.target.value)}
+                                                placeholder={tudo1.fatordivisao}
                                                 onKeyPress={handleKeyPresss}
                                             />
-                                            <Button className="divisao" onClick={divisao} > Salvar</Button>
+                                            <Button className="divisao" onClick={()=>divisaoID(fator1,'2')} > Salvar</Button>
                                         </Form.Group>
                                     </Form>
 
@@ -1152,12 +1182,12 @@ export default function Administrador() {
 
                                                 as={IMaskInput}
                                                 mask='00-00-0000'
-                                                value={inicio}
-                                                onChange={(txt) => setInicio(txt.target.value)}
-                                                placeholder={tudo.dtinicio}
+                                                value={inicio1}
+                                                onChange={(txt) => setInicio1(txt.target.value)}
+                                                placeholder={tudo1.dtinicio}
                                                 onKeyPress={handleKeyPressss}
                                             />
-                                            <Button className="dtinicio" onClick={datainicio}> Salvar</Button>
+                                            <Button className="dtinicio" onClick={()=>datainicio(inicio1,'2')}> Salvar</Button>
                                             <Form.Text className='text-danger' style={{ margin: 0, padding: 0 }}>{errors.inicio}</Form.Text>
                                         </Form.Group>
                                     </Form>
@@ -1171,7 +1201,7 @@ export default function Administrador() {
                                                 mask='00-00-0000'
                                                 value={fim}
                                                 onChange={(txt) => setFim(txt.target.value)}
-                                                placeholder={tudo.dtfim}
+                                                placeholder={tudo1.dtfim}
                                                 onKeyPress={handleKeyPresssss}
                                             />
                                             <Button className="dtfim" onClick={datafim}> Salvar</Button>
@@ -1190,12 +1220,11 @@ export default function Administrador() {
                                             <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Fator Divisao </Form.Label>
                                             <Form.Control
                                                 type="number"
-                                                value={fator}
-                                                onChange={(txt) => setFator(txt.target.value)}
-                                                placeholder={tudo.fatordivisao}
-                                                onKeyPress={handleKeyPresss}
+                                                value={fator2}
+                                                onChange={(txt) => setFator2(txt.target.value)}
+                                                placeholder={tudo2.fatordivisao}
                                             />
-                                            <Button className="divisao" onClick={divisao} > Salvar</Button>
+                                            <Button className="divisao" onClick={()=>divisaoID(fator2,'3')} > Salvar</Button>
                                         </Form.Group>
                                     </Form>
 
@@ -1208,12 +1237,11 @@ export default function Administrador() {
 
                                                 as={IMaskInput}
                                                 mask='00-00-0000'
-                                                value={inicio}
-                                                onChange={(txt) => setInicio(txt.target.value)}
-                                                placeholder={tudo.dtinicio}
-                                                onKeyPress={handleKeyPressss}
+                                                value={inicio2}
+                                                onChange={(txt) => setInicio2(txt.target.value)}
+                                                placeholder={tudo2.dtinicio}
                                             />
-                                            <Button className="dtinicio" onClick={datainicio}> Salvar</Button>
+                                            <Button className="dtinicio" onClick={()=>datainicio(inicio2,'3')}> Salvar</Button>
                                             <Form.Text className='text-danger' style={{ margin: 0, padding: 0 }}>{errors.inicio}</Form.Text>
                                         </Form.Group>
                                     </Form>
@@ -1227,8 +1255,7 @@ export default function Administrador() {
                                                 mask='00-00-0000'
                                                 value={fim}
                                                 onChange={(txt) => setFim(txt.target.value)}
-                                                placeholder={tudo.dtfim}
-                                                onKeyPress={handleKeyPresssss}
+                                                placeholder={tudo2.dtfim}
                                             />
                                             <Button className="dtfim" onClick={datafim}> Salvar</Button>
                                             <Form.Text className='text-danger' style={{ margin: 0, padding: 0 }}>{errors.fim}</Form.Text>
@@ -1416,7 +1443,7 @@ export default function Administrador() {
                                 <Col xs={5}>
                                     <Button onClick={() => {
                                         listar();
-                                        ltudo(); fetchData1();
+                                        ltudo('1'); fetchData1(); ltudo('2'); ltudo('3');
                                     }}>Carregar</Button>
                                 </Col>
                                 <Col>
