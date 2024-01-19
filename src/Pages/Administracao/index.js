@@ -13,6 +13,7 @@ import { Chart } from 'primereact/chart';
 import { RotatingLines } from 'react-loader-spinner';
 import Card from 'react-bootstrap/Card';
 import { Link, useNavigate } from "react-router-dom";
+import { ExplicitFill } from "react-bootstrap-icons";
 export default function Administrador() {
     const [cnpj, setCnpj] = useState("");
     const [cpf, setCpf] = useState("");
@@ -28,7 +29,11 @@ export default function Administrador() {
     const [isLoading1, setIsLoading1] = useState(true);
     const [numero, setNumero] = useState(0);
     const [nome, setNome] = useState('');
+    const [nome1, setNome1] = useState('');
+    const [nome2, setNome2] = useState('');
     const [periodo, setPeriodo] = useState('');
+    const [periodo1, setPeriodo1] = useState('');
+    const [periodo2, setPeriodo2] = useState('');
     const [texto, setTexto] = useState('');
     const [textoSobre, setTextoSobre] = useState('');
 
@@ -63,7 +68,7 @@ export default function Administrador() {
             });
     }
 
-    const editarSaibamais= async () => {
+    const editarSaibamais = async () => {
         const savedUserData = localStorage.getItem("@detailUser");
         if (savedUserData) {
             const userData = JSON.parse(savedUserData);
@@ -175,28 +180,96 @@ export default function Administrador() {
         const userData = JSON.parse(savedUserData);
         const token = userData.uid;
 
-                try {
-                await axios.delete('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
+        try {
+            await axios.delete('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
 
-                // Ação de sucesso após a exclusão
-                toast.success("Imagem Deletada com Sucesso!", {
-                    position: "top-right",
-                    autoClose: 2500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
-            } catch (error) {
-                // Tratamento de erro
-                errorr();
-            }
+            // Ação de sucesso após a exclusão
+            toast.success("Imagem Deletada com Sucesso!", {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } catch (error) {
+            // Tratamento de erro
+            errorr();
+        }
+
+
+    };
+    const DeleteImageAntiga1 = async () => {
+        const savedUserData = localStorage.getItem('@detailUser');
+        if (!savedUserData) {
+            console.log('Nenhuma informação encontrada no localStorage.');
+            return;
+        }
+        const userData = JSON.parse(savedUserData);
+        const token = userData.uid;
+
+        try {
+            await axios.delete('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas1', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            // Ação de sucesso após a exclusão
+            toast.success("Imagem Deletada com Sucesso!", {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } catch (error) {
+            // Tratamento de erro
+            errorr();
+        }
+
+
+    };
+    const DeleteImageAntiga2 = async () => {
+        const savedUserData = localStorage.getItem('@detailUser');
+        if (!savedUserData) {
+            console.log('Nenhuma informação encontrada no localStorage.');
+            return;
+        }
+        const userData = JSON.parse(savedUserData);
+        const token = userData.uid;
+
+        try {
+            await axios.delete('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas2', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            // Ação de sucesso após a exclusão
+            toast.success("Imagem Deletada com Sucesso!", {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } catch (error) {
+            // Tratamento de erro
+            errorr();
+        }
 
 
     };
@@ -211,7 +284,91 @@ export default function Administrador() {
             const token = userData.uid;
             const formData = new FormData();
             formData.append('file', selectedImage1);
-            await axios.post('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas', formData, {
+            await axios.post(`https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas`, formData, {
+
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
+
+                },
+            }).then(
+                Response => {
+
+                    toast.success("Imagem Atualizada com Sucesso!", {
+                        position: "top-right",
+                        autoClose: 2500,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                }
+            ).catch(Response => {
+                console.error(Response);
+                errorr();
+
+            });
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const uploadImageAntiga1 = async () => {
+        try {
+            const savedUserData = localStorage.getItem('@detailUser');
+            if (!savedUserData) {
+                console.log('Nenhuma informação encontrada no localStorage.');
+                return;
+            }
+            const userData = JSON.parse(savedUserData);
+            const token = userData.uid;
+            const formData = new FormData();
+            formData.append('file', selectedImage1);
+            await axios.post(`https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas1`, formData, {
+
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
+
+                },
+            }).then(
+                Response => {
+
+                    toast.success("Imagem Atualizada com Sucesso!", {
+                        position: "top-right",
+                        autoClose: 2500,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                }
+            ).catch(Response => {
+                console.error(Response);
+                errorr();
+
+            });
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const uploadImageAntiga2 = async () => {
+        try {
+            const savedUserData = localStorage.getItem('@detailUser');
+            if (!savedUserData) {
+                console.log('Nenhuma informação encontrada no localStorage.');
+                return;
+            }
+            const userData = JSON.parse(savedUserData);
+            const token = userData.uid;
+            const formData = new FormData();
+            formData.append('file', selectedImage1);
+            await axios.post(`https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas2`, formData, {
 
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -791,37 +948,6 @@ export default function Administrador() {
             console.error(error);
         }
     };
-    // const uploadVideo = async () => {
-    //     const savedUserData = localStorage.getItem('@detailUser');
-    //     if (!savedUserData) {
-    //         console.log('Nenhuma informação encontrada no localStorage.');
-    //         return;
-    //     }
-    //     const userData = JSON.parse(savedUserData);
-    //     const token = userData.uid;
-    //     try {
-    //        await axios.post('https://othondecarvalho.com.br:5555/pc/video', {
-    //             url: video,
-    //         }, {
-    //             headers: { 'Authorization': `Bearer ${token}` },
-    //         });
-
-    //         toast.success("Salvo Com Sucesso!", {
-    //             position: "top-right",
-    //             autoClose: 2500,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //             theme: "light",
-    //         });
-    //     } catch (error) {
-    //         console.error(error);
-    //         errorr();
-    //     }
-    // };
-
 
     const editarssss = async (number) => {
         const savedUserData = localStorage.getItem("@detailUser");
@@ -832,23 +958,61 @@ export default function Administrador() {
             // Caso não haja dados salvos, você pode tratar o caso de acordo
             console.log("Nenhuma informação encontrada no localStorage.");
         }
-        await axios.put(`https://othondecarvalho.com.br:5555/pc/EditarCampanha/${number}`, {
-            nome: nome,
-            periodo: periodo
-        },
-            {
-                headers: { 'Authorization': `Bearer ${token}` }
-            }).then(Response => {
-                notify();
-                setNome("");
-                setPeriodo("");
-            })
-            .catch(error => {
-                errorr();
+        if (number == 1) {
+            await axios.put(`https://othondecarvalho.com.br:5555/pc/EditarCampanha/${number}`, {
+                nome: nome,
+                periodo: periodo
+            },
+                {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                }).then(Response => {
+                    notify();
+                    setNome("");
+                    setPeriodo("");
+                })
+                .catch(error => {
+                    errorr();
 
-            });
+                });
+        }
+        else if (number === '2') {
+            console.log(number);
+
+            await axios.put(`https://othondecarvalho.com.br:5555/pc/EditarCampanha/${number}`, {
+                nome: nome1,
+                periodo: periodo1
+            },
+                {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                }).then(Response => {
+                    notify();
+                    setNome1("");
+                    setPeriodo1("");
+                })
+                .catch(error => {
+                    errorr();
+
+                });
+        }
+        else if (number == 3) {
+            await axios.put(`https://othondecarvalho.com.br:5555/pc/EditarCampanha/${number}`, {
+                nome: nome2,
+                periodo: periodo2
+            },
+                {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                }).then(Response => {
+                    notify();
+                    setNome2("");
+                    setPeriodo2("");
+                })
+                .catch(error => {
+                    errorr();
+
+                });
+        }
     }
-    
+
     const navigate = useNavigate();
 
     const editarCadastro = async () => {
@@ -879,63 +1043,8 @@ export default function Administrador() {
             <ToastContainer />
             <div className="container-fluid">
                 <div className="row">
-                    {/* <div className="col-sm-auto bg-light sticky-top">
-                        <div
-                            className={`d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top ${menuExpandido ? 'expandido' : ''
-                                }`}
-                        >
-                            <ul className="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
-
-                                <li>
-                                    <a
-                                        onClick={alternarMenu}
-                                        className="nav-link py-3 px-2"
-                                        title="Administrador"
-                                        role="button"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <span className="icon-with-name">
-                                            {menuExpandido ? <i className="bi bi-arrows-angle-contract"></i> : <i className="bi bi-arrows-angle-expand"></i>}
-
-                                        </span>
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a onClick={Principal} className="nav-link py-3 px-2 house" role="button" title="Principal" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-                                        <span className="icon-with-name">
-                                            <House />
-                                            {
-                                                menuExpandido ? ' Principal' : ''
-                                            }
-                                        </span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a onClick={admin} className="nav-link py-3 px-2" title="Administrador" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span className="icon-with-name">
-                                            <Person />{
-                                                menuExpandido ? ' Administrador' : ''
-                                            }
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a onClick={sair} className="nav-link py-3 px-2" title="Sair" role="button" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-                                        <span className="icon-with-name">
-                                            <i className="bi bi-box-arrow-left"></i>{
-                                                menuExpandido ? ' Sair' : ''
-                                            }
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> */}
-                    <div style={{marginTop: window.innerWidth <= 1200 ? 42 : 0}}>
-
+                    <div style={{ marginTop: window.innerWidth <= 1200 ? 42 : 0 }}>
                     </div>
-
                     <div className="col-sm p-3 min-vh-100">
                         <div className="container-xl mt-3 ">
                             <Row style={{ display: 'flex' }}>
@@ -959,6 +1068,10 @@ export default function Administrador() {
                                         </Form.Group>
                                     </Form>
                                 </Col>
+                                
+                            </Row>
+                            <Row>
+                                <Row><h5>1° Campanha</h5></Row>
                                 <Col>
                                     <Form className="mb-3">
                                         <Form.Group className="mb-3 input-group-text mb-3" id="basic-addon1" style={{ margin: 0, padding: 0 }}>
@@ -975,8 +1088,6 @@ export default function Administrador() {
                                     </Form>
 
                                 </Col>
-                            </Row>
-                            <Row>
                                 <Col>
                                     <Form className="mb-3">
                                         <Form.Group className="mb-3 input-group-text mb-3" id="basic-addon1" style={{ margin: 0, padding: 0 }}>
@@ -1015,53 +1126,198 @@ export default function Administrador() {
                                     </Form>
                                 </Col>
                             </Row>
-                            <Row className="mb-3 border border-black" style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>     
-                                        {/* <Form.Group className="mb-3 input-group-text mb-3" id="basic-addon1" style={{ margin: 0, padding: 0 }}>  */}
-                                        <Col xs={window.innerWidth <= 1200 ? 12 : 6}>
-                                         <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Nome</Form.Label>
+                            <Row>
+                                <Row><h5>2° Campanha</h5></Row>
+                                <Col>
+                                    <Form className="mb-3">
+                                        <Form.Group className="mb-3 input-group-text mb-3" id="basic-addon1" style={{ margin: 0, padding: 0 }}>
+                                            <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Fator Divisao </Form.Label>
                                             <Form.Control
-                                                value={nome}
-                                                onChange={(txt) => setNome(txt.target.value)}
-                                                placeholder={"Nome da Campanha"}
+                                                type="number"
+                                                value={fator}
+                                                onChange={(txt) => setFator(txt.target.value)}
+                                                placeholder={tudo.fatordivisao}
+                                                onKeyPress={handleKeyPresss}
                                             />
-                                        </Col>
-                                           <Col xs={window.innerWidth <= 1200 ? 12 : 6}>
-                                           <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Periodo</Form.Label>
+                                            <Button className="divisao" onClick={divisao} > Salvar</Button>
+                                        </Form.Group>
+                                    </Form>
+
+                                </Col>
+                                <Col>
+                                    <Form className="mb-3">
+                                        <Form.Group className="mb-3 input-group-text mb-3" id="basic-addon1" style={{ margin: 0, padding: 0 }}>
+                                            <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Data inicio </Form.Label>
                                             <Form.Control
-                                                value={periodo}
-                                                onChange={(txt) => setPeriodo(txt.target.value)}
-                                                placeholder={"Periodo Da Campanha"}
+
+                                                as={IMaskInput}
+                                                mask='00-00-0000'
+                                                value={inicio}
+                                                onChange={(txt) => setInicio(txt.target.value)}
+                                                placeholder={tudo.dtinicio}
+                                                onKeyPress={handleKeyPressss}
                                             />
-                                           </Col>
-                                            
-                                            <Form.Text className='text-danger mb-3' style={{ margin: 0, padding: 0 }}>{errors.inicio}</Form.Text>
-                                            <Row style={{ justifyContent: 'center' }}> 
-                                                <Col xs={4} ><Button onClick={editarssss} type="button" class="btn btn-primary" > Salvar</Button></Col>
-                                            </Row>
-                                            
-                                        {/* </Form.Group> */}
+                                            <Button className="dtinicio" onClick={datainicio}> Salvar</Button>
+                                            <Form.Text className='text-danger' style={{ margin: 0, padding: 0 }}>{errors.inicio}</Form.Text>
+                                        </Form.Group>
+                                    </Form>
+                                </Col>
+                                <Col>
+                                    <Form className="mb-3">
+                                        <Form.Group className="mb-3 input-group-text mb-3" id="basic-addon1" style={{ margin: 0, padding: 0 }}>
+                                            <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Data Fim </Form.Label>
+                                            <Form.Control
+                                                as={IMaskInput}
+                                                mask='00-00-0000'
+                                                value={fim}
+                                                onChange={(txt) => setFim(txt.target.value)}
+                                                placeholder={tudo.dtfim}
+                                                onKeyPress={handleKeyPresssss}
+                                            />
+                                            <Button className="dtfim" onClick={datafim}> Salvar</Button>
+                                            <Form.Text className='text-danger' style={{ margin: 0, padding: 0 }}>{errors.fim}</Form.Text>
+
+                                        </Form.Group>
+
+                                    </Form>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Row><h5>3° Campanha</h5></Row>
+                                <Col>
+                                    <Form className="mb-3">
+                                        <Form.Group className="mb-3 input-group-text mb-3" id="basic-addon1" style={{ margin: 0, padding: 0 }}>
+                                            <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Fator Divisao </Form.Label>
+                                            <Form.Control
+                                                type="number"
+                                                value={fator}
+                                                onChange={(txt) => setFator(txt.target.value)}
+                                                placeholder={tudo.fatordivisao}
+                                                onKeyPress={handleKeyPresss}
+                                            />
+                                            <Button className="divisao" onClick={divisao} > Salvar</Button>
+                                        </Form.Group>
+                                    </Form>
+
+                                </Col>
+                                <Col>
+                                    <Form className="mb-3">
+                                        <Form.Group className="mb-3 input-group-text mb-3" id="basic-addon1" style={{ margin: 0, padding: 0 }}>
+                                            <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Data inicio </Form.Label>
+                                            <Form.Control
+
+                                                as={IMaskInput}
+                                                mask='00-00-0000'
+                                                value={inicio}
+                                                onChange={(txt) => setInicio(txt.target.value)}
+                                                placeholder={tudo.dtinicio}
+                                                onKeyPress={handleKeyPressss}
+                                            />
+                                            <Button className="dtinicio" onClick={datainicio}> Salvar</Button>
+                                            <Form.Text className='text-danger' style={{ margin: 0, padding: 0 }}>{errors.inicio}</Form.Text>
+                                        </Form.Group>
+                                    </Form>
+                                </Col>
+                                <Col>
+                                    <Form className="mb-3">
+                                        <Form.Group className="mb-3 input-group-text mb-3" id="basic-addon1" style={{ margin: 0, padding: 0 }}>
+                                            <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Data Fim </Form.Label>
+                                            <Form.Control
+                                                as={IMaskInput}
+                                                mask='00-00-0000'
+                                                value={fim}
+                                                onChange={(txt) => setFim(txt.target.value)}
+                                                placeholder={tudo.dtfim}
+                                                onKeyPress={handleKeyPresssss}
+                                            />
+                                            <Button className="dtfim" onClick={datafim}> Salvar</Button>
+                                            <Form.Text className='text-danger' style={{ margin: 0, padding: 0 }}>{errors.fim}</Form.Text>
+
+                                        </Form.Group>
+
+                                    </Form>
+                                </Col>
+                            </Row>
+                            <Row className="mb-3 border border-black" style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                {/* <Form.Group className="mb-3 input-group-text mb-3" id="basic-addon1" style={{ margin: 0, padding: 0 }}>  */}
+                                <h5>1° Campanha</h5>
+                                <Col xs={window.innerWidth <= 1200 ? 12 : 6}>
+                                    <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Nome</Form.Label>
+                                    <Form.Control
+                                        value={nome}
+                                        onChange={(txt) => setNome(txt.target.value)}
+                                        placeholder={"Nome da Campanha"}
+                                    />
+                                </Col>
+                                <Col xs={window.innerWidth <= 1200 ? 12 : 6}>
+                                    <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Periodo</Form.Label>
+                                    <Form.Control
+                                        value={periodo}
+                                        onChange={(txt) => setPeriodo(txt.target.value)}
+                                        placeholder={"Periodo Da Campanha"}
+                                    />
+                                </Col>
+
+                                <Form.Text className='text-danger mb-3' style={{ margin: 0, padding: 0 }}>{errors.inicio}</Form.Text>
+                                <Row style={{ justifyContent: 'center' }}>
+                                    <Col xs={4} ><Button onClick={() => { editarssss(1) }} type="button" class="btn btn-primary" > Salvar</Button></Col>
+                                </Row>
+
+                                {/* </Form.Group> */}
+                            </Row>
+                            <Row className="mb-3 border border-black" style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <h5>2° Campanha</h5>
+                                <Col xs={window.innerWidth <= 1200 ? 12 : 6}>
+                                    <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Nome</Form.Label>
+                                    <Form.Control
+                                        value={nome1}
+                                        onChange={(txt) => setNome1(txt.target.value)}
+                                        placeholder={"Nome da Campanha"}
+                                    />
+                                </Col>
+                                <Col xs={window.innerWidth <= 1200 ? 12 : 6}>
+                                    <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Periodo</Form.Label>
+                                    <Form.Control
+                                        value={periodo1}
+                                        onChange={(txt) => setPeriodo1(txt.target.value)}
+                                        placeholder={"Periodo Da Campanha"}
+                                    />
+                                </Col>
+
+                                <Form.Text className='text-danger mb-3' style={{ margin: 0, padding: 0 }}>{errors.inicio}</Form.Text>
+                                <Row style={{ justifyContent: 'center' }}>
+                                    <Col xs={4} ><Button onClick={() => { editarssss('2') }} type="button" class="btn btn-primary" > Salvar</Button></Col>
+                                </Row>
+
+                                {/* </Form.Group> */}
+                            </Row>
+                            <Row className="mb-3 border border-black" style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <h5>3° Campanha</h5>
+                                <Col xs={window.innerWidth <= 1200 ? 12 : 6}>
+                                    <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Nome</Form.Label>
+                                    <Form.Control
+                                        value={nome2}
+                                        onChange={(txt) => setNome2(txt.target.value)}
+                                        placeholder={"Nome da Campanha"}
+                                    />
+                                </Col>
+                                <Col xs={window.innerWidth <= 1200 ? 12 : 6}>
+                                    <Form.Label htmlFor="basic-url" className="form-label " style={{ margin: 9 }}>Periodo</Form.Label>
+                                    <Form.Control
+                                        value={periodo2}
+                                        onChange={(txt) => setPeriodo2(txt.target.value)}
+                                        placeholder={"Periodo Da Campanha"}
+                                    />
+                                </Col>
+
+                                <Form.Text className='text-danger mb-3' style={{ margin: 0, padding: 0 }}>{errors.inicio}</Form.Text>
+                                <Row style={{ justifyContent: 'center' }}>
+                                    <Col xs={4} ><Button onClick={() => { editarssss(3) }} type="button" class="btn btn-primary" > Salvar</Button></Col>
+                                </Row>
+
+                                {/* </Form.Group> */}
                             </Row>
                             <Row className="mb-5 container">
-
-                                {/* <Col xs={6}>
-                                    <Card style={{ textAlign: "center", alignItems: 'center', alignContent: 'center', justifyContent: 'center' }}>
-                                        <ListGroup variant="flush" >
-                                            <ListGroup.Item>Imagem Evento</ListGroup.Item>
-                                            <div>
-                                                <Form.Control type="file" accept=".jpg, .jpeg, .png" onChange={handleImageChange} />
-
-                                                <Button onClick={DeleteImage}>Upload Image</Button>
-                                            </div>
-                                        <ListGroup.Item>Video</ListGroup.Item>
-                                            <div>
-                                                <Form.Control placeholder="Insira a Url Do Video" value={video} onChange={(txt) => setVideo(txt.target.value)}
-                                                />
-                                                <Button onClick={uploadVideo}>Upload Video</Button>
-                                            </div>
-
-                                        </ListGroup>
-                                    </Card>
-                                </Col> */}
                                 <Col >
                                     <Card style={{ textAlign: "center", alignItems: 'right', alignContent: 'right', justifyContent: 'right' }}>
                                         <ListGroup variant="flush">
@@ -1069,15 +1325,13 @@ export default function Administrador() {
                                             <Row className="m-1">
                                                 <Col xs={2}>
                                                     <Form.Control type="number" max={5} min={0} value={numero} onChange={(txt) => setNumero(txt.target.value)} />
-
                                                 </Col>
                                                 <Col>
                                                     <div>
                                                         <Form.Control type="file" accept=".jpg, .jpeg, .png" onChange={handleImageChange1} />
                                                         <Button onClick={DeleteImage1}>Upload Image 1</Button>
                                                     </div>
-                                                </Col>  
-                                                
+                                                </Col>
                                             </Row>
                                         </ListGroup>
                                     </Card>
@@ -1085,31 +1339,64 @@ export default function Administrador() {
                                 <Col >
                                     <Card style={{ textAlign: "center", alignItems: 'right', alignContent: 'right', justifyContent: 'right' }}>
                                         <ListGroup variant="flush">
-                                            <ListGroup.Item>CARROSSEL</ListGroup.Item>
+                                            <ListGroup.Item>CARROSSEL 1°</ListGroup.Item>
                                             <Row className="m-1">
-                                               
                                                 <Col>
                                                     <div>
                                                         <Form.Control type="file" accept=".jpg, .jpeg, .png" onChange={handleImageChange1} />
-                                                        <Button onClick={uploadImageAntiga}>Upload Image Antiga</Button> <Button onClick={DeleteImageAntiga}>Delete Image Antiga</Button>
+                                                        <Button onClick={uploadImageAntiga}>Upload Image</Button> <Button onClick={DeleteImageAntiga}>Delete Image </Button>
                                                     </div>
                                                 </Col>
-                                                
+
                                             </Row>
                                         </ListGroup>
                                     </Card>
                                 </Col>
                             </Row>
-                            <Row  className="mb-5 container">
+                            <Row className="mb-5 container">
+                                <Col >
+                                    <Card style={{ textAlign: "center", alignItems: 'right', alignContent: 'right', justifyContent: 'right' }}>
+                                        <ListGroup variant="flush">
+                                            <ListGroup.Item>CARROSSEL 2°</ListGroup.Item>
+                                            <Row className="m-1">
+                                                <Col>
+                                                    <div>
+                                                        <Form.Control type="file" accept=".jpg, .jpeg, .png" onChange={handleImageChange1} />
+                                                        <Button onClick={uploadImageAntiga1}>Upload Image</Button> <Button onClick={DeleteImageAntiga1}>Delete Image</Button>
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </ListGroup>
+                                    </Card>
+                                </Col>
+                                <Col >
+                                    <Card style={{ textAlign: "center", alignItems: 'right', alignContent: 'right', justifyContent: 'right' }}>
+                                        <ListGroup variant="flush">
+                                            <ListGroup.Item>CARROSSEL 3°</ListGroup.Item>
+                                            <Row className="m-1">
+
+                                                <Col>
+                                                    <div>
+                                                        <Form.Control type="file" accept=".jpg, .jpeg, .png" onChange={handleImageChange1} />
+                                                        <Button onClick={uploadImageAntiga2}>Upload Image</Button> <Button onClick={DeleteImageAntiga2}>Delete Image</Button>
+                                                    </div>
+                                                </Col>
+
+                                            </Row>
+                                        </ListGroup>
+                                    </Card>
+                                </Col>
+                            </Row>
+                            <Row className="mb-5 container">
                                 <Col>
                                     <div>
                                         <textarea
                                             value={texto}
                                             onChange={(txt) => setTexto(txt.target.value)}
-                                            rows={4} 
-                                            cols={50} 
+                                            rows={4}
+                                            cols={50}
                                         />
-                                         <Button onClick={editarSaibamais}> Salvar Saiba Mais</Button>
+                                        <Button onClick={editarSaibamais}> Salvar Saiba Mais</Button>
                                     </div>
                                 </Col>
                                 <Col>
@@ -1117,10 +1404,10 @@ export default function Administrador() {
                                         <textarea
                                             value={textoSobre}
                                             onChange={(txt) => setTextoSobre(txt.target.value)}
-                                            rows={4} 
+                                            rows={4}
                                             cols={50}
                                         />
-                                         <Button onClick={editarSobre}> Salvar Pagina Sobre</Button>
+                                        <Button onClick={editarSobre}> Salvar Pagina Institucional</Button>
                                     </div>
                                 </Col>
                             </Row>

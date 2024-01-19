@@ -57,13 +57,7 @@ export default function Campanha2() {
         <Card.Body>
           <Card.Text>
             <p style={{ fontFamily: 'Roboto', fontSize: 20 }}>
-              Já imaginou passar um fim de semana na deslumbrante Pousada Carumbé, na Serra do Cipó? Com o Conecta, 
-              programa de relacionamento da Othon e do do Luminato, é possível! O Conecta visa celebrar e recompensar
-               a excelência em arquitetura e design, incentivando a criatividade e a inovação através de premiações bimestrais,
-                semestrais e anuais. O escritório premiado em primeiro lugar terá direito a uma semana na Pousada Carumbé, que oferece uma
-                 fusão perfeita entre aconchego e natureza. Já o segundo escritório parceiro será contemplado com uma noite na luxuosa Estagem do Mirante,
-                  situada na Serra da Moeda. Esta é uma oportunidade de vivenciar o charme arquitetônico e o conforto excepcional oferecidos por este estabelecimento.
-                  Cada projeto é uma oportunidade única de se destacar.
+        
             </p>
           </Card.Text>
         </Card.Body>

@@ -37,25 +37,19 @@ export default function PrimeiraCampanha() {
   }, []);
 
   return (
-    <div className="tamanho card-container body">
-      {imageToShowt.map((image, index) => (
-        <Card style={{ width: '18rem' }} key={index} className="custom-card body">
+    <div className="tamanho body" >
+      <div style={{display:'flex',flexDirection:'row', flexWrap:'wrap'}}>
+         {imageToShowt.map((image, index) => (
+        <Card style={{ width: '20rem',margin:7}} key={index} className="custom-card body">
           <Card.Img
             variant="top"
-            className="d-block w-100"
             src={image}
             alt={`Imagem ${index + 1}`}
-            style={{ width: 'auto' }}
           />
-          <Card.Body>
-            {/* <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button> */}
-          </Card.Body>
         </Card>
       ))}
+      </div>
+     
     </div>
   );
 }

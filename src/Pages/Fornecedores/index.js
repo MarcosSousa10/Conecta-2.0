@@ -1,10 +1,18 @@
 
+import watermarkImage from '../../Components/image/pagina-em-manutencao.png';
 export default function Fornecedores() {
- 
-    return (
-        <div className="tamanho container-md-fluid body" style={{ display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center', paddingBottom: '200px' }}>
-<p class="text-start"><h1>Fornecedores</h1></p>
 
+    return (
+<div className="tamanho body container" style={{ margin: 0, padding: 0, height: '100vh', overflow: 'hidden' }}>
+<div className='tamanho body container-fluid'
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            backgroundImage: `url(${watermarkImage})`,
+            backgroundSize: 'cover',
+          }}
+        ></div>
         </div>
 
     )

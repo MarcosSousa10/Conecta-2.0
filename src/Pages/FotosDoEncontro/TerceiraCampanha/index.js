@@ -3,9 +3,9 @@ import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-import './Primeira.style.css';
+import './Terceira.style.css';
 
-export default function PrimeiraCampanha() {
+export default function TerceiraCampanha() {
   const [imageToShowt, setImageToShowt] = useState([]);
 
   const fetchImages = async () => {
@@ -18,7 +18,7 @@ export default function PrimeiraCampanha() {
       
       const userData = JSON.parse(savedUserData);
       const token = userData.uid;
-      const response = await axios.get('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas', {
+      const response = await axios.get('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas2', {
         headers: {
           'Authorization': `Bearer ${token}`,
         }
@@ -37,9 +37,10 @@ export default function PrimeiraCampanha() {
   }, []);
 
   return (
-    <div className="tamanho card-container">
-      {imageToShowt.map((image, index) => (
-        <Card style={{ width: '18rem' }} key={index} className="custom-card">
+    <div className="tamanho ">
+      <div style={{display:'flex',flexDirection:'row', flexWrap:'wrap'}}>
+          {imageToShowt.map((image, index) => (
+        <Card style={{ width: '20rem' }} key={index} className="custom-card">
           <Card.Img
             variant="top"
             className="d-block w-100"
@@ -56,6 +57,8 @@ export default function PrimeiraCampanha() {
           </Card.Body>
         </Card>
       ))}
+      </div>
+    
     </div>
   );
 }

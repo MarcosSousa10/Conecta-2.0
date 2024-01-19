@@ -15,8 +15,8 @@ export default function Premiacoes() {
     const [nome, setNome] = useState('Campanha a definir');
     const [nome1, setNome1] = useState('Campanha a definir');
     const [nome2, setNome2] = useState('Campanha a definir');
-    const [nomeCampanha, setNomeCampanha] = useState('Nome Campanha a definir');
-    const [nomeCampanha1, setNomeCampanha1] = useState('Nome Campanha a definir');
+    const [nomeCampanha, setNomeCampanha] = useState('Campanha Segundo Semestre 2023');
+    const [nomeCampanha1, setNomeCampanha1] = useState('Campanha Primeiro Semestre 2024');
     const [nomeCampanha2, setNomeCampanha2] = useState('Nome Campanha a definir');
     const [imageToShowt, setImageToShowt] = useState([]);
     const [imageToShowt1, setImageToShowt1] = useState([]);
@@ -24,7 +24,7 @@ export default function Premiacoes() {
 
     var id;
     var cod;
-    const TrazerCampanha = async () => {
+    const TrazerCampanha = async (ID) => {
         const savedUserData = localStorage.getItem("@detailUser");
         if (savedUserData) {
             const userData = JSON.parse(savedUserData);
@@ -34,11 +34,21 @@ export default function Premiacoes() {
             console.log("Nenhuma informação encontrada no localStorage.");
         }
 
-        await axios.get(`https://othondecarvalho.com.br:5555/pc/Campanha`, {
+        await axios.get(`https://othondecarvalho.com.br:5555/pc/Campanha/${ID}`, {
             headers: { 'Authorization': `Bearer ${id}` },
         }).then(Response => {
-            setCampanha(Response.data.periodo);
-            setNome(Response.data.nome);
+            if (ID === '1') {
+                setCampanha(Response.data.periodo);
+                setNome(Response.data.nome);
+            }
+            else if (ID === '2') {
+                setCampanha1(Response.data.periodo);
+                setNome1(Response.data.nome);
+            }            
+            else if (ID === '3') {
+                setCampanha2(Response.data.periodo);
+                setNome2(Response.data.nome);
+            }
         })
             .catch(Response => {
                 toast.error("Não Foram Encontrados Dasdos Para Esta Consulta", {
@@ -85,7 +95,7 @@ export default function Premiacoes() {
             }
             const userData = JSON.parse(savedUserData);
             const token = userData.uid;
-            const response = await axios.get('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas', {
+            const response = await axios.get('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas1', {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 }
@@ -108,7 +118,7 @@ export default function Premiacoes() {
             }
             const userData = JSON.parse(savedUserData);
             const token = userData.uid;
-            const response = await axios.get('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas', {
+            const response = await axios.get('https://othondecarvalho.com.br:5555/imagemCarrosselFAntigas2', {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 }
@@ -123,14 +133,16 @@ export default function Premiacoes() {
         }
     };
     useEffect(() => {
-        TrazerCampanha();
+        TrazerCampanha('1');
+        TrazerCampanha('2');
+        TrazerCampanha('3');
         fetchImages();
         fetchImages1();
         fetchImages2();
     }, [])
     return (
         <div className="tamanho container-md-fluid body" style={{ textAlign: 'center', alignItems: 'center' }}>
-            <ToastContainer/>
+            <ToastContainer />
             <Row>
                 <Col xs={12} className="d-flex justify-content-center">
                     <h1>Premiações</h1>
@@ -140,8 +152,8 @@ export default function Premiacoes() {
                 <Col >
                     <Card.Link href="/PrimeiraCampanha" style={{ textDecoration: 'none' }}>
                         <div className="card  h-100 body" style={{ marginLeft: '5px' }}>
-                            <h3 className="card-title">{nome}</h3>
-                            <h5 className="card-text">{nomeCampanha}</h5>
+                            <h3 className="card-title">{nomeCampanha1}</h3>
+                            <h5 className="card-text">{nome}</h5>
                             {/* <img style={{ width: '100%', height: 'auto' }} src={imagem} alt="Logo" /> */}
                             <Col>
                                 <Carousel >
@@ -169,10 +181,10 @@ export default function Premiacoes() {
                     </Card.Link>
                 </Col>
                 <Col>
-                    <Card.Link href="#" style={{ textDecoration: 'none' }}>
+                    <Card.Link href="/SegundaCampanha" style={{ textDecoration: 'none' }}>
                         <div className="card h-100 body " >
-                            <h3 className="card-title">{nome2}</h3>
-                            <h5 className="card-text">{nomeCampanha}</h5>
+                            <h3 className="card-title">{nomeCampanha}</h3>
+                            <h5 className="card-text">{nome1}</h5>
                             <Col>
                                 <Carousel >
                                     {imageToShowt1.map((image, index) => (
@@ -181,7 +193,7 @@ export default function Premiacoes() {
                                                 className="d-block w-100"
                                                 src={image}
                                                 alt={`Imagem ${index + 1}`}
-                                                style={{ height: '500px', width: 'auto' }} // Defina o tamanho desejado aqui
+                                                style={{ height: '500px', width: 'auto' }} 
                                             />
                                             <Carousel.Caption>
                                                 {/* Adicione título e descrição se disponíveis */}
@@ -199,11 +211,11 @@ export default function Premiacoes() {
 
                 </Col>
                 <Col>
-                    <Card.Link href="#" style={{ textDecoration: 'none' }}>
+                    <Card.Link href="/TerceiraCampanha" style={{ textDecoration: 'none' }}>
 
                         <div className="card h-100 body" style={{ marginRight: '5px' }}>
-                            <h3 className="card-title">{nome2}</h3>
-                            <h5 className="card-text">{nomeCampanha}</h5>
+                            <h3 className="card-title">{nomeCampanha2}</h3>
+                            <h5 className="card-text">{nome2}</h5>
                             <Col>
                                 <Carousel >
                                     {imageToShowt2.map((image, index) => (

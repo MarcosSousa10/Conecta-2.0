@@ -94,10 +94,10 @@ const Header = () => {
                 <div className="container-fluid">
 
                     <div className="row" >
-                        <main className="container-main navbar navbar-dark bg-dark row" style={{display: menuVisible ? 'flex' : 'none' }}>
+                        <main className="container-main navbar navbar-dark bg-dark row" style={{ display: menuVisible ? 'flex' : 'none' }}>
                             <div className='col-1' >
-                                <Link to={'/conecta'} >                       
-                                 <img src={watermarkImage} width={110}  alt={``} />
+                                <Link to={'/conecta'} >
+                                    <img src={watermarkImage} width={110} alt={``} />
 
                                 </Link>
                             </div>
@@ -110,54 +110,16 @@ const Header = () => {
                                 </div>
                             </div>
 
-                            <div className="col-sm-auto bg-light sticky-top mt-2" >
-                                <div
-                                    className={`d-flex flex-sm-row flex-row flex-nowrap bg-light align-items-center sticky-top `}
-                                >
-                                    <ul className="nav nav-pills nav-flush flex-sm-row flex-row flex-nowrap mb-auto mx-auto text-center align-items-center" style={{ display: menuVisible ? 'flex' : 'none' }}>
-                                        <li className="nav-item">
-                                            <a onClick={Principal} className="nav-link py-3 px-2 house" role="button" title="Principal" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-                                                <span style={{ color: 'red' }} className="icon-with-name">
-                                                    <House />
-                                                </span>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a onClick={admin} className="nav-link py-3 px-2" title="Administrador" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <span style={{ color: 'red' }} className="icon-with-name">
-                                                    <Person />
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a onClick={sair} className="nav-link py-3 px-2" title="Sair" role="button" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-                                                <span style={{ color: 'red' }} className="icon-with-name">
-                                                    <i className="bi bi-box-arrow-left"></i>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a onClick={Sobre} className="nav-link py-3 px-2" title="Sair" role="button" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-                                                <span style={{ color: 'red' }} className="icon-with-name">
-                                                    <Infor />
-                                                </span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
 
                         </main >
                     </div>
                 </div>
             </div>
             <div className='media mediam'>
-                <main className="container-main navbar navbar-dark bg-dark row" style={{display: menuVisible ? 'flex' : 'none' }}>
-                    <div className='col-1' style={{ textAlign: 'left', maxWidth: 20, marginBottom: 20, marginLeft:'-5%' }}>
-                        <Link to={'/conecta'} >                            
-                        <img src={watermarkImage} width={110}  alt={``} />
+                <main className="container-main navbar navbar-dark bg-dark row" style={{ display: menuVisible ? 'flex' : 'none' }}>
+                    <div className='col-1' style={{ textAlign: 'left', maxWidth: 20, marginBottom: 20, marginLeft: '-5%' }}>
+                        <Link to={'/conecta'} >
+                            <img src={watermarkImage} width={110} alt={``} />
                         </Link>
                     </div>
                     <div className='media mediam col-3' >
@@ -194,22 +156,22 @@ const Header = () => {
             </div>
             <div className='computer '>
 
-                <main className="container-main navbar navbar-dark bg-dark row" style={{display: menuVisible ? 'flex' : 'none' }}>
+                <main className="container-main navbar navbar-dark bg-dark row" style={{ display: menuVisible ? 'flex' : 'none' }}>
 
-                    <div className='col-1' style={{ textAlign: 'left', maxWidth: 20, marginBottom: 20 , marginLeft:'-5%'}}>
+                    <div className='col-1' style={{ textAlign: 'left', maxWidth: 20, marginBottom: 20, marginLeft: '-5%' }}>
                         <Link to={'/conecta'} >
-                        <img src={watermarkImage} width={110}  alt={``} />
+                            <img src={watermarkImage} width={110} alt={``} />
 
                         </Link>
                     </div>
-                    <div className='computer col-3' >
+                    <div className='computer col-11' style={{ textAlign: 'center',marginRight:'-6%' }}>
                         <div className='row'>
-                            <div className='col' style={{}}>
+                            <div className='col' style={{ margin: 'auto' }}>
                                 <img src={Teacher1} width={230} style={{ marginBottom: 20 }} alt={``} />
                             </div>
                         </div>
-
                     </div>
+
                     <ul className='col-1 ' style={{ color: 'white', textAlign: 'center', display: menuVisible ? 'flex' : 'none', alignItems: 'center', justifyContent: 'center' }}>
 
                         <Nav.Link onClick={Principal} className="nav-link py-3 px-2 house" role="button" title="Principal" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">

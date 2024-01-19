@@ -22,50 +22,66 @@ import Campanha from "./Pages/Campanhas/Campanha";
 import Campanha1 from "./Pages/Campanhas/Campanha1";
 import Campanha2 from "./Pages/Campanhas/Campanha2";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SegundaCampanha from "./Pages/FotosDoEncontro/SegundaCampanha";
+import TerceiraCampanha from "./Pages/FotosDoEncontro/TerceiraCampanha";
 function App() {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
   useEffect(() => {
-      const savedUserData = localStorage.getItem("@detailUser");
-      setMenuVisible(!!savedUserData);
-      
+    const savedUserData = localStorage.getItem("@detailUser");
+    setMenuVisible(!!savedUserData);
+
   }, []);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
   return (
     <BrowserRouter >
-      <div className="container-fluid" style={{ margin: 0, padding: 0,width: '100%'}}>
-      <Header />
+      <div className="container-fluid" style={{ margin: 0, padding: 0, width: '100%' }}>
+        <Header />
+        
+        {/* <i class="bi bi-arrows-fullscreen" style={{ display: menuVisible ? window.innerWidth > 1000 ? 'none' : 'flex' : 'none' }} onClick={toggleSidebar}></i>
+
+          <div className="container-fluid" style={{ width: '100%', display: sidebarOpen ? window.innerWidth > 1000 ? 'none' : '' : 'none' }}>
+                <Sidebar />
+
+          </div> */}
         <Row>
-        <Col  style={{padding:0, margin: 0, maxWidth: '12.666%' ,display: menuVisible ?  window.innerWidth < 600 ? 'none' : 'flex' : 'none' }}>
-            <Sidebar />
+          <Col className="body" style={{ padding: 0, margin: 0, maxWidth: '12.666%', display: menuVisible ? 'flex' : 'none' }}>
+                <Sidebar />
           </Col>
-          <Col   style={{ margin: 0, padding: 0,width: '100%' }}>
-            <div className="m-0" style={{ margin: 0, padding: 0,width: '100%' }}>
+          <Col style={{ margin: 0, padding: 0, width: '100%' }}>
+            <div className="m-0" style={{ margin: 0, padding: 0, width: '100%'}}>
               <Routes>
-                <Route path='/conecta'  element={<Login />} />
+
+                <Route path='/conecta' element={<Login />} />
                 <Route path='/Cadastro/:ids?' element={<Cadastro />} />
-                <Route path="/Principal"  element={<Private><PrivateAceito><Principal /></PrivateAceito></Private>} />
+                <Route path="/Principal" element={<Private><PrivateAceito><Principal /></PrivateAceito></Private>} />
                 <Route path="/Administrador" element={<PrivateAdmin><PrivateAceito><Administrador /></PrivateAceito></PrivateAdmin>} />
                 <Route path="/Redefinicao" element={<RedefinicaodeSenha />} />
                 <Route path="/Sobre" element={<Private><PrivateAceito><Sobre /></PrivateAceito></Private>} />
                 <Route path="/Subtela" element={<Subtela />} />
-                <Route path="/Fornecedores" element={<Fornecedores />} />
+                <Route path="/Fornecedores" element={<Fornecedores  />} />
                 <Route path="/Contato" element={<Contato />} />
                 <Route path="/Premiacoes" element={<Premiacoes />} />
                 <Route path="/PrimeiraCampanha" element={<PrimeiraCampanha />} />
+                <Route path="/SegundaCampanha" element={<SegundaCampanha />} />
+                <Route path="/TerceiraCampanha" element={<TerceiraCampanha />} />
                 <Route path="/Campanha" element={<Campanha />} />
                 <Route path="/Campanha1" element={<Campanha1 />} />
                 <Route path="/Campanha2" element={<Campanha2 />} />
-
-                
               </Routes>
             </div>
-            </Col>
+          </Col>
         </Row>
-        <div style={{ margin: 0, padding: 0,width: '100%'}} >
-        <ModalFooter    style={{ margin: 0, padding: 0,width: '100%' }}   />           
-
+        <div style={{ width: '100%' }} >
+          <ModalFooter style={{ width: '100%'}} />
         </div>
 
- </div>
+      </div>
     </BrowserRouter>
   );
 }

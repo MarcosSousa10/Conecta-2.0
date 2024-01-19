@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Alkalami&display=swap');
 .contato {
     font-family: 'Alkalami', serif;
-    display: flex;
     align-items: center;
     justify-content: center;
     height: calc(100vh - 130px);

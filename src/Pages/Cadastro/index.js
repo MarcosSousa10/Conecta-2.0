@@ -473,13 +473,14 @@ export default function Cadastro() {
 
 
     return (
-        <div className='container mt-5'>
+        <div className='body tamanho' >
+        <div className='container '>
 
             <ToastContainer />
             {
                 ids === undefined
                     ?
-                    <div className='container mt-5'>
+                    <div className='container'>
                         <div style={{ textAlign: 'center' }}>
                             <h1>Cadastro de Profissionais</h1></div>
                         <div className="mb-3">
@@ -682,14 +683,14 @@ export default function Cadastro() {
                         <Button onClick={validarCNPJ}>Salvar</Button>
                     </div >
                     :
-                    <div className='container mt-5'>
+                    <div className='container body'>
                         <div style={{ textAlign: 'center' }}>
                             <h1>Editar Cadastro</h1></div>
-                        <div className="mb-3">
+                        <div className="mb-3 ">
                             <label htmlFor="basic-url" className="form-label"></label>
-                            <div className="input-group mb-3">
+                            <div className="input-group mb-3 ">
                                 <span className="input-group-text" id="basic-addon1">Nome</span>
-                                <input type="text" value={descricao} onChange={(txt) => setDescricao(txt.target.value)} className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
+                                <input type="text" value={descricao} onChange={(txt) => setDescricao(txt.target.value)} className="form-control " aria-label="Username" aria-describedby="basic-addon1" />
                             </div>
                             <div style={{ margin: 0, padding: 0, textAlign: 'center' }}>
 
@@ -880,5 +881,7 @@ export default function Cadastro() {
 
             }
         </div >
+        </div >
+        
     )
 }

@@ -1,6 +1,6 @@
 
 
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { House } from 'react-bootstrap-icons';
@@ -16,64 +16,17 @@ const Sidebar = () => {
     const [activePage, setActivePage] = useState('home'); // Initial active page
     const handlePageClick = (pageName) => {
         setActivePage(pageName);
-        // Perform any other actions you need when clicking on a page
     };
     const Sobre = (String) => {
-        // const savedUserData = localStorage.getItem("@detailUser");
-        // if (savedUserData) {
-        //     const userData = JSON.parse(savedUserData);
-        //     id = userData.uid;
-        // } else {
-        //     console.log("Nenhuma informação encontrada no localStorage.");
-        // }
         navigate(String);
     }
     return (
-        <nav id="sidebarMenu" className="collapse d-lg-block sidebar   contatos bg-dark" style={{ height: '100%', width: '100%' ,margin:0,padding:0 }} >
-            <div className="position-sticky" style={{ height: '100%', width: '100%',margin:0,padding:0 }}>
-                <div className="list-group list-group-flush" style={{ height: '100%', width: '100%',margin:0,padding:0 }}>
-                    <ul style={{ fontSize: 20, color: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center',  height: '100%', width: '100%',margin:0,padding:0 }}>
-                    <Nav.Link
-                            onClick={() =>{Sobre("/Principal"); handlePageClick('home')}}
-                            className={`list-group-item list-group-item-action py-2 ripple ${activePage === 'home' ? 'active' : ''}`}
-                            role="button"
-                            title="home"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="right"
-                            data-bs-original-title="home"
-                            style={{
-                                color: activePage === 'home' ? 'black' : 'white',
-                                backgroundColor: activePage === 'home' ? '#666666' : 'transparent',
-                                fontSize:'14px',
-
-                            }}
-                        >                          <span className="icon-with-name" style={{marginRight:5}}>
-                                <House />
-                            </span>
-                            HOME
-                        </Nav.Link>
+        <nav id="sidebarMenu" className=" d-lg-block sidebar   contatos bg-dark container-fluid" style={{ height: '100%', width: '100%', margin: 0, padding: 0 }} >
+            <div className="position-sticky" style={{ height: '100%', width: '100%', margin: 0, padding: 0 }}>
+                <div className="list-group list-group-flush" style={{ height: '100%', width: '100%', margin: 0, padding: 0 }}>
+                    <ul style={{ fontSize: 20, color: 'white', textAlign: 'center', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%', margin: 0, padding: 0 }}>
                         <Nav.Link
-                            onClick={() =>{Sobre("Sobre"); handlePageClick('INSTITUCIONAL');}}
-                            className={`list-group-item list-group-item-action py-2 ripple ${activePage === 'INSTITUCIONAL' ? 'active' : ''}`}
-                            role="button"
-                            title="INSTITUCIONAL"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="right"
-                            data-bs-original-title="INSTITUCIONAL"
-                            style={{
-                                color: activePage === 'INSTITUCIONAL' ? 'black' : 'white',
-                                backgroundColor: activePage === 'INSTITUCIONAL' ? '#666666' : 'transparent',
-                                fontSize:'14px',
-                            }}
-                        >                           
-                        <span className="icon-with-name" style={{marginRight:5}}> 
-                        <Infor />
-
-                        </span>
-                        INSTITUCIONAL
-                        </Nav.Link>
-                        <Nav.Link
-                            onClick={() => {Sobre("/Principal");handlePageClick('CAMPANHA VIGENTE')}}
+                            onClick={() => { Sobre("/Principal"); handlePageClick('CAMPANHA VIGENTE') }}
                             className={`list-group-item list-group-item-action py-2 ripple ${activePage === 'CAMPANHA VIGENTE' ? 'active' : ''}`}
                             role="button"
                             title="CAMPANHA VIGENTE"
@@ -83,16 +36,51 @@ const Sidebar = () => {
                             style={{
                                 color: activePage === 'CAMPANHA VIGENTE' ? 'black' : 'white',
                                 backgroundColor: activePage === 'CAMPANHA VIGENTE' ? '#666666' : 'transparent',
-                                fontSize:'14px',
+                                fontSize: '14px',
 
                             }}
-                        >                            <span className="icon-with-name" style={{marginRight:5}}>
-                                <House />
-                            </span>
-                            CAMPANHA VIGENTE
+                        >
+                            <div style={{ display: window.innerWidth > 900 ? 'none' : '', }}>
+                                <span className="icon-with-name" style={{ marginRight: 5 }}>
+                                    <House />
+                                </span></div>
+
+                            <div style={{ display: window.innerWidth < 900 ? 'none' : '', }}>
+                                <span className="icon-with-name" style={{ marginRight: 5 }}>
+                                    <House />
+                                </span> CAMPANHA VIGENTE
+
+                            </div>
                         </Nav.Link>
                         <Nav.Link
-                            onClick={() => {Sobre("/Premiacoes");handlePageClick('PREMIAÇÕES');}}
+                            onClick={() => { Sobre("Sobre"); handlePageClick('INSTITUCIONAL'); }}
+                            className={`list-group-item list-group-item-action py-2 ripple ${activePage === 'INSTITUCIONAL' ? 'active' : ''}`}
+                            role="button"
+                            title="INSTITUCIONAL"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="right"
+                            data-bs-original-title="INSTITUCIONAL"
+                            style={{
+                                color: activePage === 'INSTITUCIONAL' ? 'black' : 'white',
+                                backgroundColor: activePage === 'INSTITUCIONAL' ? '#666666' : 'transparent',
+                                fontSize: '14px',
+                            }}
+                        >
+                            <div style={{ display: window.innerWidth > 900 ? 'none' : '', }}>
+                                <span className="icon-with-name" style={{ marginRight: 5 }}>
+                                    <Infor />
+                                </span></div>
+
+                            <div style={{ display: window.innerWidth < 900 ? 'none' : '', }}>
+                                <span className="icon-with-name" style={{ marginRight: 5 }}>
+                                    <Infor />
+
+                                </span>
+                                INSTITUCIONAL
+                            </div>
+                        </Nav.Link>
+                        <Nav.Link
+                            onClick={() => { Sobre("/Premiacoes"); handlePageClick('PREMIAÇÕES'); }}
                             className={`list-group-item list-group-item-action py-2 ripple ${activePage === 'PREMIAÇÕES' ? 'active' : ''}`}
                             role="button"
                             title="PREMIAÇÕES"
@@ -102,16 +90,26 @@ const Sidebar = () => {
                             style={{
                                 color: activePage === 'PREMIAÇÕES' ? 'black' : 'white',
                                 backgroundColor: activePage === 'PREMIAÇÕES' ? '#666666' : 'transparent',
-                                fontSize:'14px',
+                                fontSize: '14px',
 
                             }}
-                        >                            <span className="icon-with-name" style={{marginRight:5}}>
-                                <Premio />
-                            </span>
-                            PREMIAÇÕES
+                        >
+                            <div style={{ display: window.innerWidth > 900 ? 'none' : '', }}>
+                                <span className="icon-with-name" style={{ marginRight: 5 }}>
+                                    <Premio />
+                                </span>
+                            </div>
+                            <div style={{ display: window.innerWidth < 900 ? 'none' : '', }}>
+                                <span className="icon-with-name" style={{ marginRight: 5 }}>
+                                    <Premio />
+                                </span>
+
+                                PREMIAÇÕES
+                            </div>
                         </Nav.Link>
+
                         <Nav.Link
-                            onClick={() => {Sobre("/Fornecedores");handlePageClick('FORNECEDORES');}}
+                            onClick={() => { Sobre("/Fornecedores"); handlePageClick('FORNECEDORES'); }}
                             className={`list-group-item list-group-item-action py-2 ripple ${activePage === 'FORNECEDORES' ? 'active' : ''}`}
                             role="button"
                             title="FORNECEDORES"
@@ -121,16 +119,23 @@ const Sidebar = () => {
                             style={{
                                 color: activePage === 'FORNECEDORES' ? 'black' : 'white',
                                 backgroundColor: activePage === 'FORNECEDORES' ? '#666666' : 'transparent',
-                                fontSize:'14px',
+                                fontSize: '14px',
 
                             }}
-                        >                            <span className="icon-with-name" style={{marginRight:5}}>
-                                <Ferramentas />
-                            </span>
-                            FORNECEDORES
+                        >
+                            <div style={{ display: window.innerWidth > 900 ? 'none' : '', }}>
+                                <span className="icon-with-name" style={{ marginRight: 5 }}>
+                                    <Ferramentas />
+                                </span></div>
+                            <div style={{ display: window.innerWidth < 900 ? 'none' : '', }}>
+                                <span className="icon-with-name" style={{ marginRight: 5 }}>
+                                    <Ferramentas />
+                                </span>
+                                FORNECEDORES
+                            </div>
                         </Nav.Link>
                         <Nav.Link
-                            onClick={() => {Sobre("Contato");handlePageClick('DUVIDAS E SUGESTOES');}}
+                            onClick={() => { Sobre("Contato"); handlePageClick('DUVIDAS E SUGESTOES'); }}
                             className={`list-group-item list-group-item-action py-2 ripple ${activePage === 'DUVIDAS E SUGESTOES' ? 'active' : ''}`}
                             role="button"
                             title="DUVIDAS E SUGESTOES"
@@ -140,14 +145,22 @@ const Sidebar = () => {
                             style={{
                                 color: activePage === 'DUVIDAS E SUGESTOES' ? 'black' : 'white',
                                 backgroundColor: activePage === 'DUVIDAS E SUGESTOES' ? '#666666' : 'transparent',
-                                fontSize:'14px',
+                                fontSize: '14px',
 
                             }}
-                        >                            <span className="icon-with-name" style={{marginRight:5}}>
-                                                        <Person />
+                        >
+                            <div style={{ display: window.innerWidth > 900 ? 'none' : '', }}>
+                                <span className="icon-with-name" style={{ marginRight: 5 }}>
+                                    <Person />
+                                </span>
+                            </div>
+                            <div style={{ display: window.innerWidth < 900 ? 'none' : '', }}>
+                                <span className="icon-with-name" style={{ marginRight: 5 }}>
+                                    <Person />
 
-                            </span>
-                            DUVIDAS E SUGESTOES
+                                </span>
+                                DUVIDAS E SUGESTOES
+                            </div>
                         </Nav.Link>
                     </ul>
                 </div>
