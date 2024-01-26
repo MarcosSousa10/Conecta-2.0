@@ -64,15 +64,15 @@ function App() {
                 <Route path="/Redefinicao" element={<RedefinicaodeSenha />} />
                 <Route path="/Sobre" element={<Private><PrivateAceito><Sobre /></PrivateAceito></Private>} />
                 <Route path="/Subtela" element={<Subtela />} />
-                <Route path="/Fornecedores" element={<Fornecedores  />} />
-                <Route path="/Contato" element={<Contato />} />
-                <Route path="/Premiacoes" element={<Premiacoes />} />
-                <Route path="/PrimeiraCampanha" element={<PrimeiraCampanha />} />
-                <Route path="/SegundaCampanha" element={<SegundaCampanha />} />
-                <Route path="/TerceiraCampanha" element={<TerceiraCampanha />} />
-                <Route path="/Campanha" element={<Campanha />} />
-                <Route path="/Campanha1" element={<Campanha1 />} />
-                <Route path="/Campanha2" element={<Campanha2 />} />
+                <Route path="/Fornecedores" element={<Private><PrivateAceito><Fornecedores  /></PrivateAceito></Private>} />
+                <Route path="/Contato" element={<Private><PrivateAceito><Contato /></PrivateAceito></Private>} />
+                <Route path="/Premiacoes" element={<Private><PrivateAceito><Premiacoes /></PrivateAceito></Private>} />
+                <Route path="/PrimeiraCampanha" element={<Private><PrivateAceito><PrimeiraCampanha /></PrivateAceito></Private>} />
+                <Route path="/SegundaCampanha" element={<Private><PrivateAceito><SegundaCampanha /></PrivateAceito></Private>} />
+                <Route path="/TerceiraCampanha" element={<Private><PrivateAceito><TerceiraCampanha /></PrivateAceito></Private>} />
+                <Route path="/Campanha" element={<Private><PrivateAceito><Campanha /></PrivateAceito></Private>} />
+                <Route path="/Campanha1" element={<Private><PrivateAceito><Campanha1 /></PrivateAceito></Private>} />
+                <Route path="/Campanha2" element={<Private><PrivateAceito><Campanha2 /></PrivateAceito></Private>} />
               </Routes>
             </div>
           </Col>

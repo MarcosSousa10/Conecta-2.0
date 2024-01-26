@@ -44,7 +44,7 @@ export default function Premiacoes() {
             else if (ID === '2') {
                 setCampanha1(Response.data.periodo);
                 setNome1(Response.data.nome);
-            }            
+            }
             else if (ID === '3') {
                 setCampanha2(Response.data.periodo);
                 setNome2(Response.data.nome);
@@ -149,7 +149,7 @@ export default function Premiacoes() {
                 </Col>
             </Row>
             <Row className="row row-cols-1 row-cols-md-3 g-4 ">
-                <Col >
+                <Col style={{ display: nome === '' ? 'none' : '' }}>
                     <Card.Link href="/PrimeiraCampanha" style={{ textDecoration: 'none' }}>
                         <div className="card  h-100 body" style={{ marginLeft: '5px' }}>
                             <h3 className="card-title">{nomeCampanha1}</h3>
@@ -180,7 +180,7 @@ export default function Premiacoes() {
                         </div>
                     </Card.Link>
                 </Col>
-                <Col>
+                <Col style={{ display: nome1 === '' ? 'none' : '' }}>
                     <Card.Link href="/SegundaCampanha" style={{ textDecoration: 'none' }}>
                         <div className="card h-100 body " >
                             <h3 className="card-title">{nomeCampanha}</h3>
@@ -193,7 +193,7 @@ export default function Premiacoes() {
                                                 className="d-block w-100"
                                                 src={image}
                                                 alt={`Imagem ${index + 1}`}
-                                                style={{ height: '500px', width: 'auto' }} 
+                                                style={{ height: '500px', width: 'auto' }}
                                             />
                                             <Carousel.Caption>
                                                 {/* Adicione título e descrição se disponíveis */}
@@ -210,7 +210,7 @@ export default function Premiacoes() {
                     </Card.Link>
 
                 </Col>
-                <Col>
+                <Col style={{ display: nome2 === '' ? 'none' : '' }}>
                     <Card.Link href="/TerceiraCampanha" style={{ textDecoration: 'none' }}>
 
                         <div className="card h-100 body" style={{ marginRight: '5px' }}>

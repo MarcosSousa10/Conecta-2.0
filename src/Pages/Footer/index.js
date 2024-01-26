@@ -35,7 +35,7 @@ export default function ModalFooter() {
                                     <ul className="contact-details list-unstyled">
                                         <li>Ligue:
                                             <br />
-                                            <a href="#">31 8225-2486
+                                            <a href="#"> 31 8225-2486 / 31 2103-3000
 </a>
                                         </li>
                                         <li>Instagram:<br/>

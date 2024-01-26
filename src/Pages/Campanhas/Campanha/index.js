@@ -48,31 +48,44 @@ export default function Campanha() {
       console.log("Nenhuma informação encontrada no localStorage.");
     }
 
-    await axios.get(`https://othondecarvalho.com.br:5555/pc/Campanha`, {
+    await axios.get(`https://othondecarvalho.com.br:5555/pc/Campanha1`, {
       headers: { 'Authorization': `Bearer ${id}` },
     }).then(Response => {
       setCampanha(Response.data.periodo);
       setNome(Response.data.nome);
     })
       .catch(Response => {
-        toast.error("Não Foram Encontrados Dasdos Para Esta Consulta", {
-          position: "top-right",
-          autoClose: 2500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        console.log(Response);
+
       });
+  }
+  const [texto, setTexto] = useState('');
+  const informa = async () => {
+      const savedUserData = localStorage.getItem("@detailUser");
+      if (savedUserData) {
+          const userData = JSON.parse(savedUserData);
+          id = userData.uid;
+          cod = userData.email;
+      } else {
+          console.log("Nenhuma informação encontrada no localStorage.");
+      }
+      await axios.get(`https://www.othondecarvalho.com.br:5555/pc/Saibamais/1`, {
+          headers: { 'Authorization': `Bearer ${id}` },
+      }).then(Response => {
+          setTexto(Response.data.texto);
+      })
+          .catch(Response => {
+              console.log(Response)
+          });
   }
   useEffect(() => {
     return () => {
       TrazerCampanha();
       fetchImages();
+      informa();
     };
   }, [])
+  
   return (
     <div>
 <Row className="tamanho container-fluid body d-flex align-items-start justify-content-center pt-2">      
@@ -117,13 +130,8 @@ export default function Campanha() {
             <Card.Body>
               <Card.Text>
                 <p style={{ fontFamily: 'Roboto', fontSize: 20 }}>
-                  Já imaginou passar um fim de semana na deslumbrante Pousada Carumbé, na Serra do Cipó? Com o Conecta,
-                  programa de relacionamento da Othon e do do Luminato, é possível! O Conecta visa celebrar e recompensar
-                  a excelência em arquitetura e design, incentivando a criatividade e a inovação através de premiações bimestrais,
-                  semestrais e anuais. O escritório premiado em primeiro lugar terá direito a uma semana na Pousada Carumbé, que oferece uma
-                  fusão perfeita entre aconchego e natureza. Já o segundo escritório parceiro será contemplado com uma noite na luxuosa Estagem do Mirante,
-                  situada na Serra da Moeda. Esta é uma oportunidade de vivenciar o charme arquitetônico e o conforto excepcional oferecidos por este estabelecimento.
-                  Cada projeto é uma oportunidade única de se destacar.
+                 {texto}
+                            
                 </p>
               </Card.Text>
             </Card.Body>

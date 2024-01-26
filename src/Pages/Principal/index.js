@@ -337,7 +337,7 @@ export default function Principal() {
                                                         <img width={  '40%'} src={icone} alt={``} />
                                                         <Table striped bordered hover style={{ border: 'black', fontSize: '15px' }}>
                                                             <thead >
-                                                                <tr >
+                                                            <tr style={{display: nome2 === nome === nome1 ==='' ? 'none': ''}}>
                                                                     <th style={{ background: '#e2e1e1', color: 'black' }}>#</th>
                                                                     <th style={{ background: '#e2e1e1', color: 'black' }}>Campanha:</th>
                                                                     <th style={{ background: '#e2e1e1', color: 'black' }}>Periodo:</th>
@@ -345,14 +345,14 @@ export default function Principal() {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr >
+                                                            <tr style={{display: nome === '' ? 'none': ''}}>
                                                                     <td style={{ background: '#e2e1e1', color: 'black' }}>1</td>
                                                                     <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> <Link to={'/Campanha'} style={{ textDecoration: 'none', color: 'black' }}>{nome}</Link></h4></td>
                                                                     <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> {campanha}</h4></td>
                                                                     <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}>
                                                                         <h1 style={{ fontSize: '15px' }}>{pontucao.pontuacao ? pontucao.pontuacao.toLocaleString('pt-BR') : 0}</h1> </h4></td>
                                                                 </tr>
-                                                                <tr>
+                                                                <tr style={{display: nome1 === '' ? 'none': ''}}>
                                                                     <td style={{ background: '#e2e1e1', color: 'black' }}>2</td>
                                                                     <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> <Link to={'/Campanha1'} style={{ textDecoration: 'none', color: 'black' }}>{nome1}</Link></h4></td>
                                                                     <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> {campanha1}</h4></td>
@@ -360,12 +360,12 @@ export default function Principal() {
                                                                         <h1 style={{ fontSize: '15px' }}>{pontucao1.pontuacao ? pontucao1.pontuacao.toLocaleString('pt-BR') : 0}</h1>    </h4></td>
                                                                 </tr>
 
-                                                                <tr>
+                                                                <tr style={{display: nome2 === '' ? 'none': ''}}>
                                                                     <td style={{ background: '#e2e1e1', color: 'black' }}>3</td>
                                                                     <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> <Link to={'/Campanha2'} style={{ textDecoration: 'none', color: 'black' }}>{nome2}</Link></h4></td>
                                                                     <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}> {campanha2}</h4></td>
                                                                     <td style={{ background: '#e2e1e1', color: 'black' }}><h4 style={{ fontSize: '15px' }}>
-                                                                        <h1 style={{ fontSize: '15px' }}>{pontucao2.pontuacao ? pontucao2.pontuacao.toLocaleString('pt-BR') : 0}</h1>  </h4></td>
+                                                                    <h1 style={{ fontSize: '15px' }}>{pontucao2.pontuacao ? pontucao2.pontuacao.toLocaleString('pt-BR') : 0}</h1>  </h4></td>
                                                                 </tr>
                                                             </tbody>
                                                         </Table>

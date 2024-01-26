@@ -164,7 +164,7 @@ const Header = () => {
 
                         </Link>
                     </div>
-                    <div className='computer col-11' style={{ textAlign: 'center',marginRight:'-6%' }}>
+                    <div className='computer col-11' style={{ textAlign: 'center',marginRight:'-15%' }}>
                         <div className='row'>
                             <div className='col' style={{ margin: 'auto' }}>
                                 <img src={Teacher1} width={230} style={{ marginBottom: 20 }} alt={``} />
