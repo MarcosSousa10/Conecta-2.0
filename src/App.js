@@ -21,34 +21,21 @@ import PrimeiraCampanha from "./Pages/FotosDoEncontro/PrimeiraCampanha";
 import Campanha from "./Pages/Campanhas/Campanha";
 import Campanha1 from "./Pages/Campanhas/Campanha1";
 import Campanha2 from "./Pages/Campanhas/Campanha2";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SegundaCampanha from "./Pages/FotosDoEncontro/SegundaCampanha";
 import TerceiraCampanha from "./Pages/FotosDoEncontro/TerceiraCampanha";
 function App() {
   const [menuVisible, setMenuVisible] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
     const savedUserData = localStorage.getItem("@detailUser");
     setMenuVisible(!!savedUserData);
 
   }, []);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
   return (
+
     <BrowserRouter >
       <div className="container-fluid" style={{ margin: 0, padding: 0, width: '100%' }}>
         <Header />
-        
-        {/* <i class="bi bi-arrows-fullscreen" style={{ display: menuVisible ? window.innerWidth > 1000 ? 'none' : 'flex' : 'none' }} onClick={toggleSidebar}></i>
-
-          <div className="container-fluid" style={{ width: '100%', display: sidebarOpen ? window.innerWidth > 1000 ? 'none' : '' : 'none' }}>
-                <Sidebar />
-
-          </div> */}
         <Row>
           <Col className="body" style={{ padding: 0, margin: 0, maxWidth: '12.666%', display: menuVisible ? 'flex' : 'none' }}>
                 <Sidebar />
@@ -56,7 +43,6 @@ function App() {
           <Col style={{ margin: 0, padding: 0, width: '100%' }}>
             <div className="m-0" style={{ margin: 0, padding: 0, width: '100%'}}>
               <Routes>
-
                 <Route path='/conecta' element={<Login />} />
                 <Route path='/Cadastro/:ids?' element={<Cadastro />} />
                 <Route path="/Principal" element={<Private><PrivateAceito><Principal /></PrivateAceito></Private>} />
@@ -83,6 +69,7 @@ function App() {
 
       </div>
     </BrowserRouter>
+
   );
 }
 

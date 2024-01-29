@@ -78,11 +78,9 @@ export default function Campanha1() {
           });
   }
   useEffect(() => {
-    return () => {
       TrazerCampanha();
       fetchImages();
       informa();
-    };
   }, [])
   return (
     <div>
